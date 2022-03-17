@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="content">
+    <div class="content-wrap" style="padding: 0px;">
+        <div class="col_full m-2">
+            <div class="col_one_half p-4">
+                <input class="form-control" type="number" id="filter-year" min="2016" placeholder="Año" style="width: 25%;" value="{{ year }}"/>
+            </div>
+            <div class="col_one_half_last p-4">
+                <button class="btn btn-info" id="search"> Buscar </button>
+            </div>
+        </div>
+        <div class="container center clearfix">
+            <div class="mt-2" style="float: right;"></div>
+            <div class="col-full"></div>
+            <div class="col-full"></div>
+            <div class="tabs tabs-alt tabs-justify tabs-tb clearfix" id="tab-8">
+                <ul class="tab-nav clearfix">
+                    <li><a class="load-api" href="#op1" data-id="op1">GENERAL</a></li>
+                    <li><a class="load-api" href="#op2" data-id="op2">MENSUAL</a></li>
+                    <li><a class="load-api" href="#op3" data-id="op3">DETALLES</a></li>
+                </ul>
+                <div class="tab-container">
+                    <div class="tab-content clearfix" id="op1">
+                        <div class="col-full">
+                            <div class="container_loader_ppal" id="container_loader_chart0-1"><div class="loader_ppal" id="loader_chart0-1" style="bottom: 180px;"></div></div>
+                            <div>
+                                <div class="col_one_fourth center"><h3 class="ffamily"><span id="ind1-asociados"></span> ASOCIADOS</h3></div>
+								<div class="col_one_fourth center"><h3 class="ffamily"><span id="ind1-activos"></span> ACTIVOS</h3></div>
+								<div class="col_one_fourth center"><h3 class="ffamily"><span id="ind1-noactivos"></span> NO ACTIVOS</h3></div>
+								<div class="col_one_fourth col_last center"></div>
+                            </div><br>
+							<div class="bottommargin divcenter" style="max-width: 1150px; min-height: 350px;">
+							    <canvas id="indicador1-chart"></canvas>
+							</div>
+                        </div>
+                    </div>
+                    <div class="tab-content clearfix" id="op2">
+                        <div class="col-full">
+                            <div class="container_loader_ppal" id="container_loader_chart0-2"><div class="loader_ppal" id="loader_chart0-2" style="bottom: 180px;"></div></div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered nobottommargin">
+								    <tbody>
+									    <tr class="tbold">
+										    <td></td>
+										    <td></td>
+										    <td colspan="3" class="tabnaranja">Mensual</td>
+										    <td colspan="3" class="tabgris">Anual</td>
+										    <td class="tabgris"><?= date('Y'); ?></td>
+										</tr>
+										<tr>
+										    <td class="tabgris">Objetivo</td>
+											<td class="tabgris">INDICADORES 2022</td>
+											<td class="tabgris">REAL</td>
+											<td class="tabgris">META</td>
+											<td class="tabgris">AVANCE</td>
+											<td class="tabgris">REAL</td>
+											<td class="tabgris">META</td>
+											<td class="tabgris">AVANCE</td>
+											<td class="tabgris">META</td>
+                                        </tr>
+										<tr>
+										    <td class="tabazul">A2 Uso de productos y servicios</td>
+											<td>Retención ponderada</td>
+											<td id="ind1-real">96%</td>
+											<td id="meta">98%</td>
+											<td class="pastnar" id="ind1-avance">98%</td>
+											<td id="ind1-anual-real"></td>
+											<td id="ind1-anual-meta">80%</td>
+											<td id="ind1-anual-avance"></td>
+											<td>80%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br>
+                           <div class="table-responsive" id="tablas-retencion">
+                                <table class="table table-bordered">
+                                    <thead style="backgroundColor: #00CED1;">
+                                        <th class="tabhead">Arranque</th>
+                                        <th class="tabhead">Enero</th>
+                                        <th class="tabhead">Febrero</th>
+                                        <th class="tabhead">Marzo</th>
+                                        <th class="tabhead">Abril</th>
+                                        <th class="tabhead">Mayo</th>
+                                        <th class="tabhead">Junio</th>
+                                        <th class="tabhead">Julio</th>
+                                        <th class="tabhead">Agosto</th>
+                                        <th class="tabhead">Septiembre</th>
+                                        <th class="tabhead">Octubre</th>
+                                        <th class="tabhead">Noviembre</th>
+                                        <th class="tabhead">Diciembre</th>
+                                    </thead>
+                                    <tbody>
+                                       <tr>
+                                        <td>100%</td>
+                                        <td>98.3%</td>
+                                        <td>96.7%</td>
+                                        <td>95.0%</td>
+                                        <td>93.3%</td>
+                                        <td>91.7%</td>
+                                        <td>90.0%</td>
+                                        <td>88.3%</td>
+                                        <td>86.7%</td>
+                                        <td>85.0%</td>
+                                        <td>83.3%</td>
+                                        <td>81.7%</td>
+                                        <td>80.0%</td>
+                                       </tr>
+                                       <tr>
+                                        <td>Retención</td>
+                                        <td id="ret_1"></td>
+                                        <td id="ret_2"></td>
+                                        <td id="ret_3"></td>
+                                        <td id="ret_4"></td>
+                                        <td id="ret_5"></td>
+                                        <td id="ret_6"></td>
+                                        <td id="ret_7"></td>
+                                        <td id="ret_8"></td>
+                                        <td id="ret_9"></td>
+                                        <td id="ret_10"></td>
+                                        <td id="ret_11"></td>
+                                        <td id="ret_12"></td>
+                                       </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="tab1-mensual">
+                                    <td class="tabhead">% Mensual</td>
+                                    <td id="ret_mensual_1"></td>
+                                    <td id="ret_mensual_2"></td>
+                                    <td id="ret_mensual_3"></td>
+                                    <td id="ret_mensual_4"></td>
+                                    <td id="ret_mensual_5"></td>
+                                    <td id="ret_mensual_6"></td>
+                                    <td id="ret_mensual_7"></td>
+                                    <td id="ret_mensual_8"></td>
+                                    <td id="ret_mensual_9"></td>
+                                    <td id="ret_mensual_10"></td>
+                                    <td id="ret_mensual_11"></td>
+                                    <td id="ret_mensual_12"></td>
+                                </table>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="tab1-anual">
+                                    <td class="tabhead">% Anual</td>
+                                    <td id="ret_anual_1"></td>
+                                    <td id="ret_anual_2"></td>
+                                    <td id="ret_anual_3"></td>
+                                    <td id="ret_anual_4"></td>
+                                    <td id="ret_anual_5"></td>
+                                    <td id="ret_anual_6"></td>
+                                    <td id="ret_anual_7"></td>
+                                    <td id="ret_anual_8"></td>
+                                    <td id="ret_anual_9"></td>
+                                    <td id="ret_anual_10"></td>
+                                    <td id="ret_anual_11"></td>
+                                    <td id="ret_anual_12"></td>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="tab-content clearfix" id="op3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block script %}
+<script>
+
+    const indicador1 = new Chart(document.getElementById('indicador1-chart'), {
+        type: 'bar',
+        data: {},
+        plugins: [ChartDataLabels],
+        options: {
+            plugins: {
+                datalabels: {
+                    color: 'black',
+                    align: 'end',
+                    anchor: 'end',
+                    font: { weight: 'bold' },
+                    formatter: function(value, context) {
+                        return value ? numberFormat(value) : '';
+                    }
+                },
+            },
+        },
+    });
+
+    const updChartBar = (chart, year) => {
+        $.post('/app/getTotals', {year}, (rs) => {
+            if(rs.status) {
+                let dataset = [{
+                    label: 'Total',
+                    data: rs.data[2],
+                    backgroundColor: rs.colores[2],
+                },{
+                    label: 'Activos',
+                    data: rs.data[0],
+                    backgroundColor: rs.colores[0],
+                },{
+                    label: 'No Activos',
+                    data: rs.data[1],
+                    backgroundColor: rs.colores[1],
+                }];
+                chart.data = { labels: rs.labels, datasets: dataset};
+                chart.update();
+            }
+            $("#container_loader_chart0-1").hide();
+        });
+    }
+
+    $(document).on('click','#search',(e) => {
+        e.preventDefault();
+        updChartBar(indicador1, $("#filter-year").val());
+    });
+
+    //Inicio
+    updChartBar(indicador1, $("#filter-year").val());
+
+</script>
+{% endblock %}

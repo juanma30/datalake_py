@@ -12,3 +12,7 @@ def inicio():
 def indicador1():
     anio = datetime.now()
     return render_template('indicador1.html', year=anio.year)
+
+@app.route('/indicador2')
+def indicador2():
+    return render_template('indicador2.html')

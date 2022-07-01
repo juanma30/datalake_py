@@ -1,0 +1,381 @@
+{% extends 'base.html' %}
+
+{% block titulo %}INDICADOR 01 - ASOCIADOS ACTIVOS & NO ACTIVOS{% endblock %}
+{% block page %}GS1 INDICADORES{% endblock %}
+
+{% block content %}
+<section id="content">
+    <div class="content-wrap" style="padding: 0px;">
+        <div class="container center clearfix">
+            <div class="mt-2" style="float: right;"></div>
+            <div class="col-full"></div>
+            <div class="col-full"></div>
+            <div class="tabs tabs-alt tabs-justify tabs-tb clearfix" id="tab-8">
+                <ul class="tab-nav clearfix">
+                    <li><a class="load-api" href="#op1" data-id="op1">GENERAL</a></li>
+                    <li><a class="load-api" href="#op2" data-id="op2">MENSUAL</a></li>
+                    <li><a class="load-api" href="#op3" data-id="op3">DETALLES</a></li>
+                </ul>
+                <div class="tab-container">
+                    <div class="tab-content clearfix" id="op1">
+                        <div class="col-full">
+                            <div class="container_loader_ppal" id="container_loader_chart0-1"><div class="loader_ppal" id="loader_chart0-1" style="bottom: 180px;"></div></div>
+                            <div>
+                                <div class="col_one_fourth center"><h3 class="ffamily"><span id="ind1-asociados"></span> ASOCIADOS</h3></div>
+								<div class="col_one_fourth center"><h3 class="ffamily"><span id="ind1-activos"></span> ACTIVOS</h3></div>
+								<div class="col_one_fourth center"><h3 class="ffamily"><span id="ind1-noactivos"></span> NO ACTIVOS</h3></div>
+								<div class="col_one_fourth col_last center"></div>
+                            </div><br>
+							<div class="bottommargin divcenter" style="max-width: 1150px; min-height: 350px;">
+							    <canvas id="indicador1-chart"></canvas>
+							</div>
+                        </div>
+                    </div>
+                    <div class="tab-content clearfix" id="op2">
+                        <div class="col-full">
+                            <div class="container_loader_ppal" id="container_loader_chart0-2"><div class="loader_ppal" id="loader_chart0-2" style="bottom: 180px;"></div></div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered nobottommargin">
+								    <tbody>
+									    <tr class="tbold">
+										    <td></td>
+										    <td></td>
+										    <td colspan="3" class="tabnaranja">Mensual</td>
+										    <td colspan="3" class="tabgris">Anual</td>
+										    <td class="tabgris"><?= date('Y'); ?></td>
+										</tr>
+										<tr>
+										    <td class="tabgris">Objetivo</td>
+											<td class="tabgris">INDICADORES 2022</td>
+											<td class="tabgris">REAL</td>
+											<td class="tabgris">META</td>
+											<td class="tabgris">AVANCE</td>
+											<td class="tabgris">REAL</td>
+											<td class="tabgris">META</td>
+											<td class="tabgris">AVANCE</td>
+											<td class="tabgris">META</td>
+                                        </tr>
+										<tr>
+										    <td class="tabazul">A2 Uso de productos y servicios</td>
+											<td>Retención ponderada</td>
+											<td class="ind1-real">96%</td>
+											<td id="meta">98%</td>
+											<td class="pastnar ind1-real" id="ind1-avance">98%</td>
+											<td class="ind1-real"></td>
+											<td id="ind1-anual-meta">80%</td>
+											<td id="ind1-anual-avance"></td>
+											<td>80%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br>
+                            <div class="table-responsive" id="tablas-niveles">
+                                <table class="table table-bordered table-equal">
+                                    <thead>
+                                        <tr class="tabhead">
+                                            <th class="title-table-td-5">Nivel</th>
+                                            <th>Primero de Enero</th>
+                                            <th>Enero</th>
+                                            <th>Febrero</th>
+                                            <th>Marzo</th>
+                                            <th>Abril</th>
+                                            <th>Mayo</th>
+                                            <th>Junio</th>
+                                            <th>Julio</th>
+                                            <th>Agosto</th>
+                                            <th>Septiembre</th>
+                                            <th>Octubre</th>
+                                            <th>Noviembre</th>
+                                            <th>Diciembre</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tniveles">
+                                        {% for i in range(0, 12) %}
+                                        <tr>
+                                            <td id="n{{ i }}">{{ i }}</td>
+                                            <td class="valores" id="n{{ i }}_0"></td>
+                                            <td class="valores" id="n{{ i }}_1"></td>
+                                            <td class="valores" id="n{{ i }}_2"></td>
+                                            <td class="valores" id="n{{ i }}_3"></td>
+                                            <td class="valores" id="n{{ i }}_4"></td>
+                                            <td class="valores" id="n{{ i }}_5"></td>
+                                            <td class="valores" id="n{{ i }}_6"></td>
+                                            <td class="valores" id="n{{ i }}_7"></td>
+                                            <td class="valores" id="n{{ i }}_8"></td>
+                                            <td class="valores" id="n{{ i }}_9"></td>
+                                            <td class="valores" id="n{{ i }}_10"></td>
+                                            <td class="valores" id="n{{ i }}_11"></td>
+                                            <td class="valores" id="n{{ i }}_12"></td>
+                                        </tr>
+                                        {% endfor %}
+                                        <tr>
+                                            <td id="n12">LEI</td>
+                                            <td class="valores" id="n12_0"></td>
+                                            <td class="valores" id="n12_1"></td>
+                                            <td class="valores" id="n12_2"></td>
+                                            <td class="valores" id="n12_3"></td>
+                                            <td class="valores" id="n12_4"></td>
+                                            <td class="valores" id="n12_5"></td>
+                                            <td class="valores" id="n12_6"></td>
+                                            <td class="valores" id="n12_7"></td>
+                                            <td class="valores" id="n12_8"></td>
+                                            <td class="valores" id="n12_9"></td>
+                                            <td class="valores" id="n12_10"></td>
+                                            <td class="valores" id="n12_11"></td>
+                                            <td class="valores" id="n12_12"></td>
+                                        </tr>
+                                        <tr>
+                                            <td id="n13">Otros</td>
+                                            <td class="valores" id="n13_0"></td>
+                                            <td class="valores" id="n13_1"></td>
+                                            <td class="valores" id="n13_2"></td>
+                                            <td class="valores" id="n13_3"></td>
+                                            <td class="valores" id="n13_4"></td>
+                                            <td class="valores" id="n13_5"></td>
+                                            <td class="valores" id="n13_6"></td>
+                                            <td class="valores" id="n13_7"></td>
+                                            <td class="valores" id="n13_8"></td>
+                                            <td class="valores" id="n13_9"></td>
+                                            <td class="valores" id="n13_10"></td>
+                                            <td class="valores" id="n13_11"></td>
+                                            <td class="valores" id="n13_12"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br>
+                           <div class="table-responsive" id="tablas-retencion">
+                                <table class="table table-bordered table-equal">
+                                    <thead style="backgroundColor: #00CED1;">
+                                        <th class="tabhead title-table-td-5">Arranque</th>
+                                        <th class="tabhead">Enero</th>
+                                        <th class="tabhead">Febrero</th>
+                                        <th class="tabhead">Marzo</th>
+                                        <th class="tabhead">Abril</th>
+                                        <th class="tabhead">Mayo</th>
+                                        <th class="tabhead">Junio</th>
+                                        <th class="tabhead">Julio</th>
+                                        <th class="tabhead">Agosto</th>
+                                        <th class="tabhead">Septiembre</th>
+                                        <th class="tabhead">Octubre</th>
+                                        <th class="tabhead">Noviembre</th>
+                                        <th class="tabhead">Diciembre</th>
+                                    </thead>
+                                    <tbody>
+                                       <tr>
+                                        <td class="valores-calc">100%</td>
+                                        <td class="valores-calc">98.3%</td>
+                                        <td class="valores-calc">96.7%</td>
+                                        <td class="valores-calc">95.0%</td>
+                                        <td class="valores-calc">93.3%</td>
+                                        <td class="valores-calc">91.7%</td>
+                                        <td class="valores-calc">90.0%</td>
+                                        <td class="valores-calc">88.3%</td>
+                                        <td class="valores-calc">86.7%</td>
+                                        <td class="valores-calc">85.0%</td>
+                                        <td class="valores-calc">83.3%</td>
+                                        <td class="valores-calc">81.7%</td>
+                                        <td class="valores-calc">80.0%</td>
+                                       </tr>
+                                       <tr>
+                                        <td>Retención</td>
+                                        <td class="valores"id="ret_1"></td>
+                                        <td class="valores"id="ret_2"></td>
+                                        <td class="valores"id="ret_3"></td>
+                                        <td class="valores"id="ret_4"></td>
+                                        <td class="valores"id="ret_5"></td>
+                                        <td class="valores"id="ret_6"></td>
+                                        <td class="valores"id="ret_7"></td>
+                                        <td class="valores"id="ret_8"></td>
+                                        <td class="valores"id="ret_9"></td>
+                                        <td class="valores"id="ret_10"></td>
+                                        <td class="valores"id="ret_11"></td>
+                                        <td class="valores"id="ret_12"></td>
+                                       </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-equal" id="tab1-mensual">
+                                    <td class="tabhead title-table-td-5">% Mensual</td>
+                                    <td class="valores"id="ret_mensual_1"></td>
+                                    <td class="valores"id="ret_mensual_2"></td>
+                                    <td class="valores"id="ret_mensual_3"></td>
+                                    <td class="valores"id="ret_mensual_4"></td>
+                                    <td class="valores"id="ret_mensual_5"></td>
+                                    <td class="valores"id="ret_mensual_6"></td>
+                                    <td class="valores"id="ret_mensual_7"></td>
+                                    <td class="valores"id="ret_mensual_8"></td>
+                                    <td class="valores"id="ret_mensual_9"></td>
+                                    <td class="valores"id="ret_mensual_10"></td>
+                                    <td class="valores"id="ret_mensual_11"></td>
+                                    <td class="valores"id="ret_mensual_12"></td>
+                                </table>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-equal" id="tab1-anual">
+                                    <td class="tabhead title-table-td-5">% Anual</td>
+                                    <td class="valores"id="ret_anual_1"></td>
+                                    <td class="valores"id="ret_anual_2"></td>
+                                    <td class="valores"id="ret_anual_3"></td>
+                                    <td class="valores"id="ret_anual_4"></td>
+                                    <td class="valores"id="ret_anual_5"></td>
+                                    <td class="valores"id="ret_anual_6"></td>
+                                    <td class="valores"id="ret_anual_7"></td>
+                                    <td class="valores"id="ret_anual_8"></td>
+                                    <td class="valores"id="ret_anual_9"></td>
+                                    <td class="valores"id="ret_anual_10"></td>
+                                    <td class="valores"id="ret_anual_11"></td>
+                                    <td class="valores"id="ret_anual_12"></td>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="tab-content clearfix" id="op3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block script %}
+<script>
+
+    var tab = 'op1'
+
+    const cleanValue = (id) => {
+        $(`${id}`).html()
+    }
+
+    const updValue = (id, val) => {
+        $(`${id}`).html(numberFormat(val))
+    }
+
+    const updValueFormat = (id, val) => {
+        $(`${id}`).html(`${numberFormat(val)}%`)
+    }
+
+    const indicador1 = new Chart(document.getElementById('indicador1-chart'), {
+        type: 'bar',
+        data: {},
+        plugins: [ChartDataLabels],
+        options: {
+            plugins: {
+                datalabels: {
+                    color: 'black',
+                    align: 'end',
+                    anchor: 'end',
+                    font: { weight: 'bold' },
+                    formatter: function(value, context) {
+                        return value ? numberFormat(value) : ''
+                    }
+                },
+            },
+        },
+    });
+
+    const updChartBar = (chart, year) => {
+        let options = {
+            'year': year,
+            'region': $('#filter-region').val(),
+            'tamanio': $("#filter-tamanio").val(),
+            'segmentacion': $('#filter-segmentacion').val(),
+            'industria': $('#filter-industria').val(),
+        }
+        $.post('/app/getTotals', options, (rs) => {
+            if(rs.status) {
+                let dataset = [{
+                    label: 'Total',
+                    data: rs.data[2],
+                    backgroundColor: rs.colores[2],
+                },{
+                    label: 'Activos',
+                    data: rs.data[0],
+                    backgroundColor: rs.colores[0],
+                },{
+                    label: 'No Activos',
+                    data: rs.data[1],
+                    backgroundColor: rs.colores[1],
+                }];
+                chart.data = { labels: rs.labels, datasets: dataset}
+                chart.update()
+            }
+            $("#container_loader_chart0-1").hide()
+        });
+    }
+
+    const updRetenciones = () => {
+        $("#retencion-totales").remove()
+        cleanValue('.valores')
+        let options = {
+            'year': $('#filter-year').val(),
+            'region': $('#filter-region').val(),
+            'tamanio': $("#filter-tamanio").val(),
+            'segmentacion': $('#filter-segmentacion').val(),
+            'industria': $('#filter-industria').val(),
+        }
+        $.post('/app/retenciones', options, (rs) => {
+            let metas = [10,10,4,4,4,4,4,4,13,13,13,13,4,1];
+            let arranque = [98.3,96.7,95.0,93.3,91.7,90.0,88.3,86.7,85.0,83.3,81.7,80.0];
+            let totales = {};
+            let retencion = {};
+            let meta_anual = 100 / 80;
+            if(rs.status) {
+                for(var i in rs.data) {
+                    let base = rs.data[i][0];
+                    for(var j in rs.data[i]) {
+                        if(totales[j] == undefined) totales[j] = 0;
+                        totales[j] += rs.data[i][j];
+                        updValue(`#n${i}_${j}`, rs.data[i][j]);
+                        if(j > 0) {
+                            if(retencion[j - 1] == undefined) retencion[j - 1] = 0;
+                            retencion[j - 1] += (rs.data[i][j] / base) * metas[i];
+                        }
+                    }
+                }
+                cadena = '<tr id="retencion-totales"><td>Totales</td>';
+                for(var t=0; t <= 12; t++) {
+                    cadena += `<td class="valores">${ totales[t] != undefined ? numberFormat(totales[t]) : '' }</td>`;
+                }
+                cadena += '</tr>';
+                $('#tniveles').append(cadena);
+                let pr = 0;
+                for(var r in retencion) {
+                    pr = (retencion[r] / arranque[r]) * 100;
+                    updValueFormat(`#ret_${parseInt(r) + 1}`, retencion[r]);
+                    updValueFormat(`#ret_mensual_${parseInt(r) + 1}`, pr);
+                    updValueFormat(`#ret_anual_${parseInt(r) + 1}`, retencion[r] * meta_anual);
+                }
+                updValueFormat(`.ind1-real`, pr);
+                semaforo('ind1-avance', pr);
+                updValueFormat(`#ind1-anual-avance`, retencion[r] * meta_anual);
+                semaforo(`ind1-anual-avance`, retencion[r] * meta_anual);
+                updValueFormat('#meta', arranque[r]);
+            }
+        })
+        $("#container_loader_chart0-2").hide()
+    }
+
+    $(document).on('click','#search',(e) => {
+        e.preventDefault();
+        (tab == 'op1') && updChartBar(indicador1, $("#filter-year").val());
+        (tab == 'op2') && updRetenciones();
+    });
+
+    $(".load-api").on('click', (e) => {
+        e.preventDefault();
+        tab = e.currentTarget.getAttribute('data-id');
+        (tab == 'op1') && updChartBar(indicador1, $("#filter-year").val());
+        (tab == 'op2') && updRetenciones();
+    })
+
+    //Inicio
+    updChartBar(indicador1, $("#filter-year").val());
+
+</script>
+{% endblock %}

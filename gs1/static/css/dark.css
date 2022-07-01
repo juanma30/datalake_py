@@ -1025,6 +1025,7 @@ body.top-search-open .dark #header-wrap:not(.not-dark) #top-search a,
 	background-color: #002c6c;
 	color: #CCC;
 	border-top-color: rgba(0,0,0,0.2);
+	margin-top: 35vh !important;
 }
 
 .dark #copyrights {

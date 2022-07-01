@@ -14151,3 +14151,40 @@ _::-moz-progress-bar, body:last-child .iconmenu_count { margin-top: 10px !import
 /* estilos usuario temporales */
 .row-margin{margin-top: 15px;margin-bottom: 15px;}
 .dt_info{cursor: pointer;}
+.table-equal > th,td { width: 114px !important;}
+.valores-calc {
+    font-size: larger !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    width: 5% !important;
+}
+.valores {
+    font-size: larger !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    width: 5% !important;
+}
+.title-table-td {
+    width: 25% !important;
+    padding-top: 30px;
+}
+.title-table-td-1 {
+    width: 25% !important;
+    padding-top: 30px;
+}
+.title-table-td-2 {
+    width: 20% !important;
+    padding-top: 30px;
+}
+.title-table-td-3 {
+    width: 15% !important;
+    padding-top: 30px;
+}
+.title-table-td-4 {
+    width: 10% !important;
+    padding-top: 30px;
+}
+.title-table-td-5 {
+    width: 5% !important;
+    padding-top: 30px;
+}

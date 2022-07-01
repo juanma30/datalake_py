@@ -1,0 +1,563 @@
+{% extends 'base.html' %}
+
+{% block titulo %}INDICADOR 02 - NUEVOS ASOCIADOS{% endblock %}
+{% block page %}GS1 INDICADORES{% endblock %}
+
+{% block content %}
+<section id="content">
+    <div class="content-wrap" style="padding: 0px;">
+        <div class="container center clearfix">
+            <div class="mt-2" style="float: right;"></div>
+            <div class="col-full"></div>
+            <div class="col-full"></div>
+            <div class="tabs tabs-alt tabs-justify tabs-tb clearfix" id="tab-8">
+                <ul class="tab-nav clearfix">
+                    <li><a class="load-api" href="#op1" data-id="op1">GENERAL</a></li>
+                    <li><a class="load-api" href="#op2" data-id="op2">RESUMEN</a></li>
+                </ul>
+                <div class="tab-container">
+                    <div class="tab-content clearfix" id="op1">
+                        <div class="col-full">
+                            <div class="container_loader_ppal" id="container_loader_chart1">
+                                <div class="loader-ppal" id="loader-chart1" style="bottom: 180px;"></div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered nobottommargin" id="codigo">
+                                    <thead>
+                                        <tr>
+                                            <th class="tabhead title-table-td" rowspan="2">CÓDIGO META</th>
+                                            <th class="tabhead">ENE</th>
+                                            <th class="tabhead">FEB</th>
+                                            <th class="tabhead">MAR</th>
+                                            <th class="tabhead">ABR</th>
+                                            <th class="tabhead">MAY</th>
+                                            <th class="tabhead">JUN</th>
+                                            <th class="tabhead">JUL</th>
+                                            <th class="tabhead">AGO</th>
+                                            <th class="tabhead">SEP</th>
+                                            <th class="tabhead">OCT</th>
+                                            <th class="tabhead">NOV</th>
+                                            <th class="tabhead">DIC</th>
+                                            <th class="tabhead">TOTAL</th>
+                                            <th class="tabhead">% AVANCE ANUAL</th>
+                                        </tr>
+                                        <tr>
+                                            <th id="cod_m_ene" class="tabhead">0</th>
+                                            <th id="cod_m_feb" class="tabhead">0</th>
+                                            <th id="cod_m_mar" class="tabhead">0</th>
+                                            <th id="cod_m_abr" class="tabhead">0</th>
+                                            <th id="cod_m_may" class="tabhead">0</th>
+                                            <th id="cod_m_jun" class="tabhead">0</th>
+                                            <th id="cod_m_jul" class="tabhead">0</th>
+                                            <th id="cod_m_ago" class="tabhead">0</th>
+                                            <th id="cod_m_sep" class="tabhead">0</th>
+                                            <th id="cod_m_oct" class="tabhead">0</th>
+                                            <th id="cod_m_nov" class="tabhead">0</th>
+                                            <th id="cod_m_dic" class="tabhead">0</th>
+                                            <th id="cod_m_t" class="tabhead">0</th>
+                                            <th id="cod_por" class="pastnar">0</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Membresías Fabricantes de Código de Barras</td>
+                                            <td class="valores-calc" id="cod_b_1">0</td>
+                                            <td class="valores-calc" id="cod_b_2">0</td>
+                                            <td class="valores-calc" id="cod_b_3">0</td>
+                                            <td class="valores-calc" id="cod_b_4">0</td>
+                                            <td class="valores-calc" id="cod_b_5">0</td>
+                                            <td class="valores-calc" id="cod_b_6">0</td>
+                                            <td class="valores-calc" id="cod_b_7">0</td>
+                                            <td class="valores-calc" id="cod_b_8">0</td>
+                                            <td class="valores-calc" id="cod_b_9">0</td>
+                                            <td class="valores-calc" id="cod_b_10">0</td>
+                                            <td class="valores-calc" id="cod_b_11">0</td>
+                                            <td class="valores-calc" id="cod_b_12">0</td>
+                                            <td class="valores-calc" id="cod_b_t">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Membresías Comercio detallista (Cadenas)</td>
+                                            <td class="valores-calc" id="cod_c_1">0</td>
+                                            <td class="valores-calc" id="cod_c_2">0</td>
+                                            <td class="valores-calc" id="cod_c_3">0</td>
+                                            <td class="valores-calc" id="cod_c_4">0</td>
+                                            <td class="valores-calc" id="cod_c_5">0</td>
+                                            <td class="valores-calc" id="cod_c_6">0</td>
+                                            <td class="valores-calc" id="cod_c_7">0</td>
+                                            <td class="valores-calc" id="cod_c_8">0</td>
+                                            <td class="valores-calc" id="cod_c_9">0</td>
+                                            <td class="valores-calc" id="cod_c_10">0</td>
+                                            <td class="valores-calc" id="cod_c_11">0</td>
+                                            <td class="valores-calc" id="cod_c_12">0</td>
+                                            <td class="valores-calc" id="cod_c_t">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Membresías GLN</td>
+                                            <td class="valores-calc" id="cod_g_1">0</td>
+                                            <td class="valores-calc" id="cod_g_2">0</td>
+                                            <td class="valores-calc" id="cod_g_3">0</td>
+                                            <td class="valores-calc" id="cod_g_4">0</td>
+                                            <td class="valores-calc" id="cod_g_5">0</td>
+                                            <td class="valores-calc" id="cod_g_6">0</td>
+                                            <td class="valores-calc" id="cod_g_7">0</td>
+                                            <td class="valores-calc" id="cod_g_8">0</td>
+                                            <td class="valores-calc" id="cod_g_9">0</td>
+                                            <td class="valores-calc" id="cod_g_10">0</td>
+                                            <td class="valores-calc" id="cod_g_11">0</td>
+                                            <td class="valores-calc" id="cod_g_12">0</td>
+                                            <td class="valores-calc" id="cod_g_t">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>TOTAL</td>
+                                            <td class="valores-calc" id="cod_t_1">0</td>
+                                            <td class="valores-calc" id="cod_t_2">0</td>
+                                            <td class="valores-calc" id="cod_t_3">0</td>
+                                            <td class="valores-calc" id="cod_t_4">0</td>
+                                            <td class="valores-calc" id="cod_t_5">0</td>
+                                            <td class="valores-calc" id="cod_t_6">0</td>
+                                            <td class="valores-calc" id="cod_t_7">0</td>
+                                            <td class="valores-calc" id="cod_t_8">0</td>
+                                            <td class="valores-calc" id="cod_t_9">0</td>
+                                            <td class="valores-calc" id="cod_t_10">0</td>
+                                            <td class="valores-calc" id="cod_t_11">0</td>
+                                            <td class="valores-calc" id="cod_t_12">0</td>
+                                            <td class="valores-calc" id="cod_t_t">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td class="valores-calc" id="cod_p_1">0</td>
+                                            <td class="valores-calc" id="cod_p_2">0</td>
+                                            <td class="valores-calc" id="cod_p_3">0</td>
+                                            <td class="valores-calc" id="cod_p_4">0</td>
+                                            <td class="valores-calc" id="cod_p_5">0</td>
+                                            <td class="valores-calc" id="cod_p_6">0</td>
+                                            <td class="valores-calc" id="cod_p_7">0</td>
+                                            <td class="valores-calc" id="cod_p_8">0</td>
+                                            <td class="valores-calc" id="cod_p_9">0</td>
+                                            <td class="valores-calc" id="cod_p_10">0</td>
+                                            <td class="valores-calc" id="cod_p_11">0</td>
+                                            <td class="valores-calc" id="cod_p_12">0</td>
+                                            <td class="valores-calc" id="cod_p_t"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered nobottommargin mt-4 mb-4" id="catalogo">
+                                    <thead>
+                                    <tr>
+                                        <th class="tabhead title-table-td" rowspan="2">CATÁLOGO META</th>
+                                        <th class="tabhead">ENE</th>
+                                        <th class="tabhead">FEB</th>
+                                        <th class="tabhead">MAR</th>
+                                        <th class="tabhead">ABR</th>
+                                        <th class="tabhead">MAY</th>
+                                        <th class="tabhead">JUN</th>
+                                        <th class="tabhead">JUL</th>
+                                        <th class="tabhead">AGO</th>
+                                        <th class="tabhead">SEP</th>
+                                        <th class="tabhead">OCT</th>
+                                        <th class="tabhead">NOV</th>
+                                        <th class="tabhead">DIC</th>
+                                        <th class="tabhead">TOTAL</th>
+                                        <th class="tabhead">% AVANCE ANUAL</th>
+                                    </tr>
+                                    <tr>
+                                        <th id="cat_m_ene" class="tabhead">0</th>
+                                        <th id="cat_m_feb" class="tabhead">0</th>
+                                        <th id="cat_m_mar" class="tabhead">0</th>
+                                        <th id="cat_m_abr" class="tabhead">0</th>
+                                        <th id="cat_m_may" class="tabhead">0</th>
+                                        <th id="cat_m_jun" class="tabhead">0</th>
+                                        <th id="cat_m_jul" class="tabhead">0</th>
+                                        <th id="cat_m_ago" class="tabhead">0</th>
+                                        <th id="cat_m_sep" class="tabhead">0</th>
+                                        <th id="cat_m_oct" class="tabhead">0</th>
+                                        <th id="cat_m_nov" class="tabhead">0</th>
+                                        <th id="cat_m_dic" class="tabhead">0</th>
+                                        <th id="cat_m_t" class="tabhead">0</th>
+                                        <th id="cat_por" class="pastnar">0</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Membresías Catálogo electrónico</td>
+                                        <td class="valores-calc" id="cat_b_1">0</td>
+                                        <td class="valores-calc" id="cat_b_2">0</td>
+                                        <td class="valores-calc" id="cat_b_3">0</td>
+                                        <td class="valores-calc" id="cat_b_4">0</td>
+                                        <td class="valores-calc" id="cat_b_5">0</td>
+                                        <td class="valores-calc" id="cat_b_6">0</td>
+                                        <td class="valores-calc" id="cat_b_7">0</td>
+                                        <td class="valores-calc" id="cat_b_8">0</td>
+                                        <td class="valores-calc" id="cat_b_9">0</td>
+                                        <td class="valores-calc" id="cat_b_10">0</td>
+                                        <td class="valores-calc" id="cat_b_11">0</td>
+                                        <td class="valores-calc" id="cat_b_12">0</td>
+                                        <td class="valores-calc" id="cat_b_t">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="valores-calc" id="cat_p_1">0</td>
+                                        <td class="valores-calc" id="cat_p_2">0</td>
+                                        <td class="valores-calc" id="cat_p_3">0</td>
+                                        <td class="valores-calc" id="cat_p_4">0</td>
+                                        <td class="valores-calc" id="cat_p_5">0</td>
+                                        <td class="valores-calc" id="cat_p_6">0</td>
+                                        <td class="valores-calc" id="cat_p_7">0</td>
+                                        <td class="valores-calc" id="cat_p_8">0</td>
+                                        <td class="valores-calc" id="cat_p_9">0</td>
+                                        <td class="valores-calc" id="cat_p_10">0</td>
+                                        <td class="valores-calc" id="cat_p_11">0</td>
+                                        <td class="valores-calc" id="cat_p_12">0</td>
+                                        <td class="valores-calc" id="cat_p_t">0</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered nobottommargin mt-4 mb-4" id="lei">
+                                    <thead>
+                                    <tr>
+                                        <th class="tabhead title-table-td" rowspan="2">LEI META</th>
+                                        <th class="tabhead">ENE</th>
+                                        <th class="tabhead">FEB</th>
+                                        <th class="tabhead">MAR</th>
+                                        <th class="tabhead">ABR</th>
+                                        <th class="tabhead">MAY</th>
+                                        <th class="tabhead">JUN</th>
+                                        <th class="tabhead">JUL</th>
+                                        <th class="tabhead">AGO</th>
+                                        <th class="tabhead">SEP</th>
+                                        <th class="tabhead">OCT</th>
+                                        <th class="tabhead">NOV</th>
+                                        <th class="tabhead">DIC</th>
+                                        <th class="tabhead">TOTAL</th>
+                                        <th class="tabhead">% AVANCE ANUAL</th>
+                                    </tr>
+                                    <tr>
+                                        <th id="lei_m_ene" class="tabhead">0</th>
+                                        <th id="lei_m_feb" class="tabhead">0</th>
+                                        <th id="lei_m_mar" class="tabhead">0</th>
+                                        <th id="lei_m_abr" class="tabhead">0</th>
+                                        <th id="lei_m_may" class="tabhead">0</th>
+                                        <th id="lei_m_jun" class="tabhead">0</th>
+                                        <th id="lei_m_jul" class="tabhead">0</th>
+                                        <th id="lei_m_ago" class="tabhead">0</th>
+                                        <th id="lei_m_sep" class="tabhead">0</th>
+                                        <th id="lei_m_oct" class="tabhead">0</th>
+                                        <th id="lei_m_nov" class="tabhead">0</th>
+                                        <th id="lei_m_dic" class="tabhead">0</th>
+                                        <th id="lei_m_t" class="tabhead">0</th>
+                                        <th id="lei_por" class="pastnar">0</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Membresías LEI</td>
+                                        <td class="valores-calc" id="lei_b_1">0</td>
+                                        <td class="valores-calc" id="lei_b_2">0</td>
+                                        <td class="valores-calc" id="lei_b_3">0</td>
+                                        <td class="valores-calc" id="lei_b_4">0</td>
+                                        <td class="valores-calc" id="lei_b_5">0</td>
+                                        <td class="valores-calc" id="lei_b_6">0</td>
+                                        <td class="valores-calc" id="lei_b_7">0</td>
+                                        <td class="valores-calc" id="lei_b_8">0</td>
+                                        <td class="valores-calc" id="lei_b_9">0</td>
+                                        <td class="valores-calc" id="lei_b_10">0</td>
+                                        <td class="valores-calc" id="lei_b_11">0</td>
+                                        <td class="valores-calc" id="lei_b_12">0</td>
+                                        <td class="valores-calc" id="lei_b_t">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="valores-calc" id="lei_p_1">0</td>
+                                        <td class="valores-calc" id="lei_p_2">0</td>
+                                        <td class="valores-calc" id="lei_p_3">0</td>
+                                        <td class="valores-calc" id="lei_p_4">0</td>
+                                        <td class="valores-calc" id="lei_p_5">0</td>
+                                        <td class="valores-calc" id="lei_p_6">0</td>
+                                        <td class="valores-calc" id="lei_p_7">0</td>
+                                        <td class="valores-calc" id="lei_p_8">0</td>
+                                        <td class="valores-calc" id="lei_p_9">0</td>
+                                        <td class="valores-calc" id="lei_p_10">0</td>
+                                        <td class="valores-calc" id="lei_p_11">0</td>
+                                        <td class="valores-calc" id="lei_p_12">0</td>
+                                        <td class="valores-calc" id="lei_p_t">0</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content clearfix" id="op2">
+                        <div class="col_full">
+                            <div class="table-responsive">
+                                <table class="table table-bordered nobottommargin">
+                                    <tbody>
+                                        <tr class="tbold">
+                                            <td></td>
+                                            <td></td>
+                                            <td colspan="4" class="tabgris" id="cur_month_ind2"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tabgris">OBJETIVO</td>
+                                            <td class="tabgris">INDICADORES</td>
+                                            <td class="tabgris">REAL</td>
+                                            <td class="tabgris">META</td>
+                                            <td class="tabgris">AVANCE</td>
+                                            <td class="tabgris">META</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tabnaranja">P1 Incrementar la penetración del mercado</td>
+                                            <td>Impulsar la captación de nuevos asociados</td>
+                                            <td id="ind2_month_real">0</td>
+                                            <td id="ind2_meta_month">307</td>
+                                            <td class="pastnar" id="ind2_month_act_per">0%</td>
+                                            <td id="ind2_meta_year">3,850</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-responsive mt-4">
+                                <table class="table table-bordered nobottommargin">
+                                    <thead>
+                                        <tr>
+                                            <th class="tabhead">Nuevos Asociados Inscripciones</th>
+                                            <th class="tabhead">ENE</th>
+                                            <th class="tabhead">FEB</th>
+                                            <th class="tabhead">MAR</th>
+                                            <th class="tabhead">ABR</th>
+                                            <th class="tabhead">MAY</th>
+                                            <th class="tabhead">JUN</th>
+                                            <th class="tabhead">JUL</th>
+                                            <th class="tabhead">AGO</th>
+                                            <th class="tabhead">SEP</th>
+                                            <th class="tabhead">OCT</th>
+                                            <th class="tabhead">NOV</th>
+                                            <th class="tabhead">DIC</th>
+                                            <th class="tabhead">TOTAL</th>
+                                            <th class="tabhead">%Avance Anual</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th class="tabhead">Meta</th>
+                                            <th class="tabhead" id="res_m_ene">0</th>
+                                            <th class="tabhead" id="res_m_feb">0</th>
+                                            <th class="tabhead" id="res_m_mar">0</th>
+                                            <th class="tabhead" id="res_m_abr">0</th>
+                                            <th class="tabhead" id="res_m_may">0</th>
+                                            <th class="tabhead" id="res_m_jun">0</th>
+                                            <th class="tabhead" id="res_m_jul">0</th>
+                                            <th class="tabhead" id="res_m_ago">0</th>
+                                            <th class="tabhead" id="res_m_sep">0</th>
+                                            <th class="tabhead" id="res_m_oct">0</th>
+                                            <th class="tabhead" id="res_m_nov">0</th>
+                                            <th class="tabhead" id="res_m_dic">0</th>
+                                            <th class="tabhead" id="res_m_t">0</th>
+                                            <th id="res_m_anual">0</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Real</th>
+                                            <th class="valores-calc" id="res_r_1">0</th>
+                                            <th class="valores-calc" id="res_r_2">0</th>
+                                            <th class="valores-calc" id="res_r_3">0</th>
+                                            <th class="valores-calc" id="res_r_4">0</th>
+                                            <th class="valores-calc" id="res_r_5">0</th>
+                                            <th class="valores-calc" id="res_r_6">0</th>
+                                            <th class="valores-calc" id="res_r_7">0</th>
+                                            <th class="valores-calc" id="res_r_8">0</th>
+                                            <th class="valores-calc" id="res_r_9">0</th>
+                                            <th class="valores-calc" id="res_r_10">0</th>
+                                            <th class="valores-calc" id="res_r_11">0</th>
+                                            <th class="valores-calc" id="res_r_12">0</th>
+                                            <th class="valores-calc" id="res_r_t">0</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Avance</th>
+                                            <th class="valores-calc" id="res_a_1">0</th>
+                                            <th class="valores-calc" id="res_a_2">0</th>
+                                            <th class="valores-calc" id="res_a_3">0</th>
+                                            <th class="valores-calc" id="res_a_4">0</th>
+                                            <th class="valores-calc" id="res_a_5">0</th>
+                                            <th class="valores-calc" id="res_a_6">0</th>
+                                            <th class="valores-calc" id="res_a_7">0</th>
+                                            <th class="valores-calc" id="res_a_8">0</th>
+                                            <th class="valores-calc" id="res_a_9">0</th>
+                                            <th class="valores-calc" id="res_a_10">0</th>
+                                            <th class="valores-calc" id="res_a_11">0</th>
+                                            <th class="valores-calc" id="res_a_12">0</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Acumulado</th>
+                                            <th class="valores-calc" id="res_ac_1">0</th>
+                                            <th class="valores-calc" id="res_ac_2">0</th>
+                                            <th class="valores-calc" id="res_ac_3">0</th>
+                                            <th class="valores-calc" id="res_ac_4">0</th>
+                                            <th class="valores-calc" id="res_ac_5">0</th>
+                                            <th class="valores-calc" id="res_ac_6">0</th>
+                                            <th class="valores-calc" id="res_ac_7">0</th>
+                                            <th class="valores-calc" id="res_ac_8">0</th>
+                                            <th class="valores-calc" id="res_ac_9">0</th>
+                                            <th class="valores-calc" id="res_ac_10">0</th>
+                                            <th class="valores-calc" id="res_ac_11">0</th>
+                                            <th class="valores-calc" id="res_ac_12">0</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block script %}
+<script>
+    var meta = { "codigo": {}, "catalogo": {}, "lei": {}, "total": {} }
+    var year = new Date().getFullYear()
+    const catalogo = { 1: "enero", 2: "febrero", 3: "marzo", 4: "abril", 5: "mayo", 6: "junio", 7: "julio", 8: "agosto", 9: "septiembre", 10: "octubre", 11: "noviembre", 12: "diciembre"}
+
+    const updValue = (id, value) => {
+        $(`#${id}`).html(value)
+    }
+
+    const updValueSemaforo = (id, valor) => {
+        updValue(id, `${numberFormat(valor)}%`)
+        semaforo(id, valor)
+    }
+
+    const cleanValues = () => {
+       $(".valores-calc").html('')
+       $(".valores-calc").removeClass('pastver')
+       $(".valores-calc").removeClass('pastnar')
+       $(".valores-calc").removeClass('pastama')
+    }
+
+    const sumar = (ob) => {
+        return Object.values(ob).reduce((act, acum) => act + acum)
+    }
+
+    const updMetas = (nuevo_anio) => {
+        $.post('/app/getMeta',{'indicador':'indicador2', 'anio': nuevo_anio}, (rs) => {
+            if(rs.status){
+                for(var i in rs.data){
+                    meta[rs.data[i].titulo] = rs.data[i].metas
+                }
+                setMetas(meta)
+            }
+        })
+    }
+
+    const setMetas = (meta) => {
+        let pref = ''
+        for(var i in meta) {
+            if(i == 'codigo') pref = 'cod'
+            if(i == 'catalogo') pref = 'cat'
+            if(i == 'lei') pref = i
+            if(i == 'total') pref = 'res'
+            total = 0
+            for(var j in meta[i]){
+                total += meta[i][j]
+                updValue(`${pref}_m_${j.substr(0,3)}`, numberFormat(meta[i][j]))
+            }
+            updValue(`${pref}_m_t`, numberFormat(total))
+            updValue('ind2_meta_year', numberFormat(total))
+        }
+    }
+
+    const updTables = () => {
+        let options = {
+            'year': $("#filter-year").val(),
+            'region': $("#filter-region").val(),
+            'tamanio': $("#filter-tamanio").val(),
+            'segmentacion': $("#filter-segmentacion").val(),
+            'industria': $("#filter-industria").val(),
+        }
+        cleanValues()
+        updMetas($("#filter-year").val())
+        $.post('/app/inscripciones', options, (rs) => {
+            let total_cod = { b:0, c:0, g:0, t:0 },
+                total_cat = 0,
+                total_lei = 0,
+                total_real = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0}
+
+            for(var i in rs.data.codigo) {
+                barras = rs.data.codigo[i].total - rs.data.codigo[i].gln - rs.data.codigo[i].cadenas
+                updValue(`cod_b_${rs.data.codigo[i].mes}`, numberFormat(barras))
+                updValue(`cod_c_${rs.data.codigo[i].mes}`, numberFormat(rs.data.codigo[i].cadenas))
+                updValue(`cod_g_${rs.data.codigo[i].mes}`, numberFormat(rs.data.codigo[i].gln))
+                updValue(`cod_t_${rs.data.codigo[i].mes}`, numberFormat(rs.data.codigo[i].total))
+                porcentaje = (rs.data.codigo[i].total * 100) / meta.codigo[catalogo[rs.data.codigo[i].mes]]
+                updValueSemaforo(`cod_p_${rs.data.codigo[i].mes}`, porcentaje)
+                total_cod.b += barras
+                total_cod.c += rs.data.codigo[i].cadenas
+                total_cod.g += rs.data.codigo[i].gln
+                total_cod.t += rs.data.codigo[i].total
+                total_real[rs.data.codigo[i].mes] += rs.data.codigo[i].total
+            }
+            updValue(`cod_b_t`, numberFormat(total_cod.b))
+            updValue(`cod_c_t`, numberFormat(total_cod.c))
+            updValue(`cod_g_t`, numberFormat(total_cod.g))
+            porcentajeTotalCodigo = (total_cod.t * 100) / sumar(meta.codigo)
+            updValueSemaforo('cod_por', porcentajeTotalCodigo)
+            updValue(`cod_t_t`, numberFormat(total_cod.t))
+
+            for(var i in rs.data.catalogo) {
+                updValue(`cat_b_${rs.data.catalogo[i].mes}`, numberFormat(rs.data.catalogo[i].total))
+                porcentaje = (rs.data.catalogo[i].total * 100) / meta.catalogo[catalogo[rs.data.catalogo[i].mes]]
+                updValueSemaforo(`cat_p_${rs.data.catalogo[i].mes}`, porcentaje)
+                total_cat += rs.data.catalogo[i].total
+                total_real[rs.data.catalogo[i].mes] += rs.data.catalogo[i].total
+            }
+            porcentajeTotalCatalogo = (total_cat * 100) / sumar(meta.catalogo)
+            updValueSemaforo('cat_por', porcentajeTotalCatalogo)
+            updValue(`cat_b_t`, numberFormat(total_cat))
+
+            for(var i in rs.data.lei) {
+                updValue(`lei_b_${rs.data.lei[i].mes}`, numberFormat(rs.data.lei[i].total))
+                porcentaje = (rs.data.lei[i].total * 100) / meta.lei[catalogo[rs.data.lei[i].mes]]
+                updValueSemaforo(`lei_p_${rs.data.lei[i].mes}`, porcentaje)
+                total_lei += rs.data.lei[i].total
+                total_real[rs.data.lei[i].mes] += rs.data.lei[i].total
+            }
+            porcentajeTotalLei = (total_lei * 100) / sumar(meta.lei)
+            updValueSemaforo('lei_por', porcentajeTotalLei)
+            updValue(`lei_b_t`, numberFormat(total_lei))
+
+            let tt_real = 0
+            let acumulado = []
+            let mes = new Date().getMonth()
+            for(var i in total_real) {
+                updValue(`res_r_${i}`, total_real[i])
+                porcentaje = total_real[i] > 0 ? (total_real[i] * 100) / meta.total[catalogo[i]] : 0
+                if(porcentaje > 0) {
+                    acumulado.push(porcentaje)
+                    updValueSemaforo(`res_ac_${i}`, acumulado.reduce((a, b) => a + b) / acumulado.length)
+                }
+                if(i == mes) {
+                    updValue('ind2_month_real', numberFormat(total_real[i]))
+                    updValue('ind2_meta_month', numberFormat(meta.total[catalogo[i]]))
+                    updValueSemaforo('ind2_month_act_per', porcentaje)
+                }
+                updValue(`res_a_${i}`, `${numberFormat(porcentaje)}%`)
+                tt_real += total_real[i]
+            }
+            porcentajeTotal = (tt_real * 100) / sumar(meta.total)
+            updValueSemaforo('res_m_anual', porcentajeTotal)
+            updValue(`res_r_t`, numberFormat(tt_real))
+        })
+        $("#container_loader_chart1").hide()
+    }
+
+    $("#search").on('click', (e) => {
+        $("#container_loader_chart1").show()
+        updTables()
+    })
+
+    updTables()
+</script>
+{% endblock %}

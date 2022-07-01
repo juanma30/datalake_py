@@ -3786,11 +3786,15 @@ const downloadFileByHtml = (indicador,contenido) => {
 	
 }
 
+if(document.getElementById('decimalFilter')) {
 var filterRnge = document.getElementById('decimalFilter');
-filterRnge.value =localStorage.getItem('decimalRange');
+filterRnge.value = localStorage.getItem('decimalRange') != undefined ? localStorage.getItem('decimalRange') : 0;
 //se ejecuta cada que se realiza un cambio en el select
 filterRnge.addEventListener('change', function (evt) {
 	evt.preventDefault();
 	localStorage.setItem('decimalRange',this.value);
 	location.reload();
 });
+}
+
+

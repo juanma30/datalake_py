@@ -25,7 +25,7 @@ def login():
 
         if username is None:
             error = "Usuario y/o contraseña invalidos"
-        elif not check_password_hash(user['password'], password):
+        if user is None or 'password' not in user.keys() or not check_password_hash(user['password'], password):
             error = "Usuario y/o contraseña invalidos"
 
         if error is None:

@@ -5,6 +5,7 @@
 
 {% block content %}
 <section id="content">
+    <div id="loading"><img src="{{ url_for('static', filename='images/loader.gif') }}" /></div>
     <div class="content-wrap" style="padding: 0px;">
         <div class="container center clearfix">
             <div class="mt-2" style="float: right;"></div>
@@ -19,7 +20,6 @@
                 <div class="tab-container">
                     <div class="tab-content clearfix" id="op1">
                         <div class="col-full">
-                            <div class="container_loader_ppal" id="container_loader_chart0-1"><div class="loader_ppal" id="loader_chart0-1" style="bottom: 180px;"></div></div>
                             <div>
                                 <div class="col_one_fourth center"><h3 class="ffamily"><span id="ind1-asociados"></span> ASOCIADOS</h3></div>
 								<div class="col_one_fourth center"><h3 class="ffamily"><span id="ind1-activos"></span> ACTIVOS</h3></div>
@@ -33,7 +33,6 @@
                     </div>
                     <div class="tab-content clearfix" id="op2">
                         <div class="col-full">
-                            <div class="container_loader_ppal" id="container_loader_chart0-2"><div class="loader_ppal" id="loader_chart0-2" style="bottom: 180px;"></div></div>
                             <div class="table-responsive">
                                 <table class="table table-bordered nobottommargin">
 								    <tbody>
@@ -280,6 +279,7 @@
     });
 
     const updChartBar = (chart, year) => {
+        $('#loading').show()
         let options = {
             'year': year,
             'region': $('#filter-region').val(),
@@ -305,11 +305,12 @@
                 chart.data = { labels: rs.labels, datasets: dataset}
                 chart.update()
             }
-            $("#container_loader_chart0-1").hide()
+            $('#loading').hide()
         });
     }
 
     const updRetenciones = () => {
+        $('#loading').show()
         $("#retencion-totales").remove()
         cleanValue('.valores')
         let options = {
@@ -357,8 +358,8 @@
                 semaforo(`ind1-anual-avance`, retencion[r] * meta_anual);
                 updValueFormat('#meta', arranque[r]);
             }
+            $('#loading').hide()
         })
-        $("#container_loader_chart0-2").hide()
     }
 
     $(document).on('click','#search',(e) => {

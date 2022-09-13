@@ -80,18 +80,36 @@
 
 	<div id="wrapper" class="clearfix">
         {% if show_decimales %}
-        <div class="col_full ml-3">
+        <div class="m-2 p-4" style="display: inline-block;">
             <label for="decimalFilter">Decimales: </label>
-            <input class="form-control" type="number" min="0" max="5" id="decimalFilter" style="width: 10%;"/>
+            <input class="form-control" type="number" min="0" max="5" id="decimalFilter"/>
         </div>
         {% endif %}
-        {% if show_filter %}
-        <div class="col_full m-2">
-            <div class="col_one_fifth p-4">
+        {% if show_year %}
+        <div class="m-2 p-4" style="display: inline-block;">
+            <div>
                 <label for="filter-year">Año:</label>
                 <input class="form-control" type="number" id="filter-year" min="2021" placeholder="Año" value="{{ year }}"/>
             </div>
-            <div class="col_one_fifth p-4">
+        </div>
+        {% endif %}
+        {% if show_date %}
+        <div  class="m-2 p-4" style="display: inline-block;">
+            <label for="filter-date-start">Fecha: </label>
+            <div class="input-group input-daterange">
+                <input type="text" id="filter-date-start" name="filter-date" class="form-control" data-provide="datepicker"/>
+                <div class="mr-2 ml-2"> a </div>
+                <input type="text" id="filter-date-end" name="filter-date" class="form-control" data-provide="datepicker"/>
+            </div>
+        </div>
+        {% endif %}
+        {% if show_filter %}
+        <div class="m-2">
+            <!-- <div class="col_one_fifth p-4">
+                <label for="filter-year">Año:</label>
+                <input class="form-control" type="number" id="filter-year" min="2021" placeholder="Año" value="{{ year }}"/>
+            </div> -->
+            <div class="col_one_fourth p-4">
                 <label for="filter-region">Regiones:</label>
                 <select class="form-control" id="filter-region">
                     <option value="all">Todas las regiones</option>
@@ -103,7 +121,7 @@
                     <option value="Valle">Valle de México</option>
                 </select>
             </div>
-            <div class="col_one_fifth p-4">
+            <div class="col_one_fourth p-4">
                 <label for="filter-tamanio">Tamaño de empresa:</label>
                 <select class="form-control" id="filter-tamanio">
                     <option value="all">Todos los tamaños</option>
@@ -112,7 +130,7 @@
                     {% endfor %}
                 </select>
             </div>
-            <div class="col_one_fifth p-4">
+            <div class="col_one_fourth p-4">
                 <label for="filter-segmentacion">Segmentación de MK</label>
                 <select class="form-control" id="filter-segmentacion">
                     <option value="all">Todos los segmentos</option>
@@ -123,7 +141,7 @@
                     <option value="Otros">Otros</option>
                 </select>
             </div>
-            <div class="col_one_fifth col_last p-4">
+            <div class="col_one_fourth col_last p-4">
                 <label for="filter-industria">Industrias</label>
                 <select class="form-control" id="filter-industria">
                     <option value="all">Todas las industrias</option>
@@ -136,7 +154,7 @@
                 </select>
             </div>
         </div>
-        <div class="col_full p-4">
+        <div class="p-4">
             <button class="btn btn-info" id="search"> Buscar </button>
         </div>
         {% endif %}

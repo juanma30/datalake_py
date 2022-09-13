@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+
+{% block titulo %}USO DE SERVICIOS GS1{% endblock %}
+{% block page %}GS1 INDICADORES{% endblock %}
+
+{% block content %}
+<div class="ml-4 pl-2">
+    <button class="btn btn-info" id="search"> Buscar </button>
+</div>
+<section class="content">
+    <div class="content-wrap">
+        <div class="container center clearfix">
+            <div class="">
+                <h2 class="orangutan" style="display:inline-block;">
+                    Porcentaje de usabilidad: <span id="porcentaje-usabilidad"></span>%
+                </h2>
+            </div>
+            <div class="">
+                <div class="table-responsive">
+                    <table id="table-use" class="table table-bordered nobottommargin">
+                        <tbody>
+                            <tr class="tabhead">
+                                <td class="title-table-td-3" colspan="3">Portafolio de productos y servicios</td>
+                                <td>Metas</td>
+                                <td>% de Avance</td>
+                            </tr>
+                            <tr class="tabhead">
+                                <td rowspan="6" style="vertical-align: middle !important">PRODUCTOS</td>
+                            </tr>
+                            <tr class="tabhead">
+                                <td>Catálogo</td>
+                                <td id="total-catalogo" class="valores-calc"></td>
+                                <td id="meta-catalogo" class="valores-calc"></td>
+                                <td id="avance-catalogo" class="valores-calc"></td>
+                            </tr>
+                            <tr class="tabhead">
+                                <td>INFOCODE</td>
+                                <td id="total-infocode" class="valores-calc"></td>
+                                <td id="meta-infocode" class="valores-calc"></td>
+                                <td id="avance-infocode" class="valores-calc"></td>
+                            </tr>
+                            <tr class="tabhead">
+                                <td>DesabastoCero</td>
+                                <td id="total-desabasto" class="valores-calc"></td>
+                                <td id="meta-desabasto" class="valores-calc"></td>
+                                <td id="avance-desabasto" class="valores-calc"></td>
+                            </tr>
+                            <tr class="tabhead">
+                                <td>LEI</td>
+                                <td id="total-lei" class="valores-calc"></td>
+                                <td id="meta-lei" class="valores-calc"></td>
+                                <td id="avance-lei" class="valores-calc"></td>
+                            </tr>
+                            <tr class="tabhead">
+                                <td>Código de Barras</td>
+                                <td id="total-codigo" class="valores-calc"></td>
+                                <td id="meta-codigo" class="valores-calc"></td>
+                                <td id="avance-codigo" class="valores-calc"></td>
+                            </tr>
+                            <tr class="tabhead">
+                                <td rowspan="5" style="vertical-align: middle !important">SERVICIOS</td>
+                            </tr>
+                            <tr class="tabhead">
+                                <td>Asesorías</td>
+                                <td id="total-asesorias" class="valores-calc"></td>
+                                <td id="meta-asesorias" class="valores-calc"></td>
+                                <td id="avance-asesorias" class="valores-calc"></td>
+                            </tr>
+                            <tr class="tabhead">
+                                <td>Cursos</td>
+                                <td id="total-cursos" class="valores-calc"></td>
+                                <td id="meta-cursos" class="valores-calc"></td>
+                                <td id="avance-cursos" class="valores-calc"></td>
+                            </tr>
+                            <tr class="tabhead">
+                                <td>Eventos</td>
+                                <td id="total-eventos" class="valores-calc"></td>
+                                <td id="meta-eventos" class="valores-calc"></td>
+                                <td id="avance-eventos" class="valores-calc"></td>
+                            </tr>
+                            <tr class="tabhead">
+                                <td>SECODAT</td>
+                                <td id="total-secodat" class="valores-calc"></td>
+                                <td id="meta-secodat" class="valores-calc"></td>
+                                <td id="avance-secodat" class="valores-calc"></td>
+                            </tr>
+                            <tr class="tabhead">
+                                <td colspan="4">Total Porcentajes</td>
+                                <td id="avance-total" class="valores-calc"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block script %}
+<script>
+
+    var total = 0;
+    var porcentaje_total = [];
+
+    var meta = {
+        'catalogo': {{ catalogo }},
+        'infocode': {{ infocode }},
+        'desabasto': {{ desabasto }},
+        'lei': {{ lei }},
+        'codigo': {{ codigo }},
+        'asesorias': {{ asesorias }},
+        'cursos': {{ cursos }},
+        'eventos': {{ eventos }},
+        'secodat': {{ secodat }}
+    };
+    var date_format = 'yyyy-mm-dd'
+    var today = new Date()
+
+    const setMonth = (fecha) => fecha < 10 ? `0${fecha}` : fecha
+
+    $("#filter-date-start").datepicker({
+        format: date_format,
+    })
+
+    $("#filter-date-end").datepicker({
+        format: date_format,
+    })
+
+    $("#filter-date-start").val(`${today.getFullYear()}-01-01`)
+    $("#filter-date-end").val(`${today.getFullYear()}-${setMonth(today.getMonth() + 1)}-${today.getDate()}`)
+
+    const cleanValue = (id) => {
+        $(`${id}`).html(0)
+    }
+
+    const updValue = (id, value) => {
+        $(`${id}`).html(numberFormat(value))
+    };
+
+    const updValuePercent = (id, value) => {
+        $(`${id}`).html(`${numberFormat(value)}%`)
+    };
+
+    const setMetas = (meta) => {
+        for(var i in meta) {
+            updValue(`#meta-${i}`, meta[i])
+        }
+    }
+
+    setMetas(meta)
+
+    const updCount = async (serv) => {
+        let options = {
+            'year': 2022,
+            'date-start': $("#filter-date-start").val(),
+            'date-end': $("#filter-date-end").val(),
+        }
+        cleanValue(`#total-${serv}`)
+        cleanValue(`#avance-${serv}`)
+        $.post(`/app/${serv}`, options, (rs) => {
+            if(rs.status) {
+                updValue(`#total-${serv}`, rs.data)
+                total += rs.data
+                porcentaje = ( rs.data / meta[serv] ) * 100
+                porcentaje_total.push(porcentaje)
+                updValuePercent(`#avance-${serv}`, porcentaje)
+            } else updValue(`#total-${serv}`, 0)
+            p = porcentaje_total.length > 0 ? porcentaje_total.reduce((a, b) => a + b) / porcentaje_total.length : 0
+            updValuePercent('#avance-total', p)
+            updValue('#porcentaje-usabilidad', p)
+        })
+    };
+
+    $("#search").on('click', () => {
+        updCount('cursos')
+        updCount('eventos')
+        updCount('desabasto')
+        updCount('secodat')
+        updCount('infocode')
+        updCount('catalogo')
+        updCount('codigo')
+        updCount('lei')
+    })
+
+    updCount('cursos')
+    updCount('eventos')
+    updCount('desabasto')
+    updCount('secodat')
+    updCount('infocode')
+    updCount('catalogo')
+    updCount('codigo')
+    updCount('lei')
+
+</script>
+{% endblock %}
+

@@ -1,0 +1,346 @@
+{% extends 'base.html' %}
+
+{% block titulo %}INDICADOR 08 - DISPONIBILIDAD DE SISTEMAS GS1{% endblock %}
+{% block page %}GS1 INDICADORES{% endblock %}
+
+{% block content %}
+<section class="content">
+    <div id="loading"><img src="{{ url_for('static', filename='images/loader.gif') }}" /></div>
+    <div class="content-wrap" style="padding: 0px;">
+        <div class="container center-clearfix">
+            <div class="col_full">
+                <div class="col_one_fifth">
+                    <label for="filter-year">Año:</label>
+                    <input class="form-control" type="number" id="filter-year" min="2021" placeholder="Año" value="{{ year }}"/>
+                </div>
+                <div class="col_full">
+                    <button class="btn btn-info" id="search"> Buscar </button>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered nobottommargin">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th class="tabgris" colspan="3"></th>
+                    </tr>
+                    <tr>
+                        <th class="tabgris">INDICADORES {{ year }}</th>
+                        <th class="tabgris">REAL</th>
+                        <th class="tabgris">META</th>
+                        <th class="tabgris">AVANCE</th>
+                        <th class="tabgris">META</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tabhead title-table-td-4">Disponibilidad de sistemas GS1</td>
+                        <td class="valores-calc" id="com_real">0</td>
+                        <td class="com_meta valores">{{ meta }}</td>
+                        <td class="valores-calc" id="com_avance">0</td>
+                        <td class="com_meta valores">{{ meta }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered nobottommargin table-equal">
+                    <thead>
+                        <tr>
+                            <th class="tabhead">Servicio</th>
+                            <th class="tabhead">Ponderación</th>
+                            <th class="tabhead">Enero</th>
+                            <th class="tabhead">Febrero</th>
+                            <th class="tabhead">Marzo</th>
+                            <th class="tabhead">Abril</th>
+                            <th class="tabhead">Mayo</th>
+                            <th class="tabhead">Junio</th>
+                            <th class="tabhead">Julio</th>
+                            <th class="tabhead">Agosto</th>
+                            <th class="tabhead">Septiembre</th>
+                            <th class="tabhead">Octubre</th>
+                            <th class="tabhead">Noviembre</th>
+                            <th class="tabhead">Diciembre</th>
+                            <th class="tabhead">Ponderado Anual</th>
+                            <th class="tabhead">Anual</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tabfontazul">Correo Electronico</td>
+                            <td class="valores">5%</td>
+                            <td class="valores-calc tabfontazul" id="correo_Ene"></td>
+                            <td class="valores-calc tabfontazul" id="correo_Feb"></td>
+                            <td class="valores-calc tabfontazul" id="correo_Mar"></td>
+                            <td class="valores-calc tabfontazul" id="correo_Abr"></td>
+                            <td class="valores-calc tabfontazul" id="correo_May"></td>
+                            <td class="valores-calc tabfontazul" id="correo_Jun"></td>
+                            <td class="valores-calc tabfontazul" id="correo_Jul"></td>
+                            <td class="valores-calc tabfontazul" id="correo_Ago"></td>
+                            <td class="valores-calc tabfontazul" id="correo_Sep"></td>
+                            <td class="valores-calc tabfontazul" id="correo_Oct"></td>
+                            <td class="valores-calc tabfontazul" id="correo_Nov"></td>
+                            <td class="valores-calc tabfontazul" id="correo_Dic"></td>
+                            <td class="valores-calc tabfontazul" id="correo_Ponderado_Anual"></td>
+                            <td class="valores-calc tabfontazul" id="correo_ANUAL"></td>
+                        </tr>
+                        <tr>
+                            <td class="tabfontazul">Syncfonia</td>
+                            <td class="valores">25%</td>
+                            <td class="valores-calc tabfontazul" id="sync_Ene"></td>
+                            <td class="valores-calc tabfontazul" id="sync_Feb"></td>
+                            <td class="valores-calc tabfontazul" id="sync_Mar"></td>
+                            <td class="valores-calc tabfontazul" id="sync_Abr"></td>
+                            <td class="valores-calc tabfontazul" id="sync_May"></td>
+                            <td class="valores-calc tabfontazul" id="sync_Jun"></td>
+                            <td class="valores-calc tabfontazul" id="sync_Jul"></td>
+                            <td class="valores-calc tabfontazul" id="sync_Ago"></td>
+                            <td class="valores-calc tabfontazul" id="sync_Sep"></td>
+                            <td class="valores-calc tabfontazul" id="sync_Oct"></td>
+                            <td class="valores-calc tabfontazul" id="sync_Nov"></td>
+                            <td class="valores-calc tabfontazul" id="sync_Dic"></td>
+                            <td class="valores-calc tabfontazul" id="sync_Ponderado_Anual"></td>
+                            <td class="valores-calc tabfontazul" id="sync_ANUAL"></td>
+                        </tr>
+                        <tr>
+                            <td class="tabfontazul">Herr. Call Center</td>
+                            <td class="valores">23%</td>
+                            <td class="valores-calc tabfontazul" id="herr_Ene"></td>
+                            <td class="valores-calc tabfontazul" id="herr_Feb"></td>
+                            <td class="valores-calc tabfontazul" id="herr_Mar"></td>
+                            <td class="valores-calc tabfontazul" id="herr_Abr"></td>
+                            <td class="valores-calc tabfontazul" id="herr_May"></td>
+                            <td class="valores-calc tabfontazul" id="herr_Jun"></td>
+                            <td class="valores-calc tabfontazul" id="herr_Jul"></td>
+                            <td class="valores-calc tabfontazul" id="herr_Ago"></td>
+                            <td class="valores-calc tabfontazul" id="herr_Sep"></td>
+                            <td class="valores-calc tabfontazul" id="herr_Oct"></td>
+                            <td class="valores-calc tabfontazul" id="herr_Nov"></td>
+                            <td class="valores-calc tabfontazul" id="herr_Dic"></td>
+                            <td class="valores-calc tabfontazul" id="herr_Ponderado_Anual"></td>
+                            <td class="valores-calc tabfontazul" id="herr_ANUAL"></td>
+                        </tr>
+                        <tr>
+                            <td class="tabfontazul">GS1 En linea</td>
+                            <td class="valores">20%</td>
+                            <td class="valores-calc tabfontazul" id="gs1_Ene"></td>
+                            <td class="valores-calc tabfontazul" id="gs1_Feb"></td>
+                            <td class="valores-calc tabfontazul" id="gs1_Mar"></td>
+                            <td class="valores-calc tabfontazul" id="gs1_Abr"></td>
+                            <td class="valores-calc tabfontazul" id="gs1_May"></td>
+                            <td class="valores-calc tabfontazul" id="gs1_Jun"></td>
+                            <td class="valores-calc tabfontazul" id="gs1_Jul"></td>
+                            <td class="valores-calc tabfontazul" id="gs1_Ago"></td>
+                            <td class="valores-calc tabfontazul" id="gs1_Sep"></td>
+                            <td class="valores-calc tabfontazul" id="gs1_Oct"></td>
+                            <td class="valores-calc tabfontazul" id="gs1_Nov"></td>
+                            <td class="valores-calc tabfontazul" id="gs1_Dic"></td>
+                            <td class="valores-calc tabfontazul" id="gs1_Ponderado_Anual"></td>
+                            <td class="valores-calc tabfontazul" id="gs1_ANUAL"></td>
+                        </tr>
+                        <tr>
+                            <td class="tabfontazul">Internet</td>
+                            <td class="valores">1%</td>
+                            <td class="valores-calc tabfontazul" id="inter_Ene"></td>
+                            <td class="valores-calc tabfontazul" id="inter_Feb"></td>
+                            <td class="valores-calc tabfontazul" id="inter_Mar"></td>
+                            <td class="valores-calc tabfontazul" id="inter_Abr"></td>
+                            <td class="valores-calc tabfontazul" id="inter_May"></td>
+                            <td class="valores-calc tabfontazul" id="inter_Jun"></td>
+                            <td class="valores-calc tabfontazul" id="inter_Jul"></td>
+                            <td class="valores-calc tabfontazul" id="inter_Ago"></td>
+                            <td class="valores-calc tabfontazul" id="inter_Sep"></td>
+                            <td class="valores-calc tabfontazul" id="inter_Oct"></td>
+                            <td class="valores-calc tabfontazul" id="inter_Nov"></td>
+                            <td class="valores-calc tabfontazul" id="inter_Dic"></td>
+                            <td class="valores-calc tabfontazul" id="inter_Ponderado_Anual"></td>
+                            <td class="valores-calc tabfontazul" id="inter_ANUAL"></td>
+                        </tr>
+                        <tr>
+                            <td class="tabfontazul">Telefonia</td>
+                            <td class="valores">1%</td>
+                            <td class="valores-calc tabfontazul" id="tel_Ene"></td>
+                            <td class="valores-calc tabfontazul" id="tel_Feb"></td>
+                            <td class="valores-calc tabfontazul" id="tel_Mar"></td>
+                            <td class="valores-calc tabfontazul" id="tel_Abr"></td>
+                            <td class="valores-calc tabfontazul" id="tel_May"></td>
+                            <td class="valores-calc tabfontazul" id="tel_Jun"></td>
+                            <td class="valores-calc tabfontazul" id="tel_Jul"></td>
+                            <td class="valores-calc tabfontazul" id="tel_Ago"></td>
+                            <td class="valores-calc tabfontazul" id="tel_Sep"></td>
+                            <td class="valores-calc tabfontazul" id="tel_Oct"></td>
+                            <td class="valores-calc tabfontazul" id="tel_Nov"></td>
+                            <td class="valores-calc tabfontazul" id="tel_Dic"></td>
+                            <td class="valores-calc tabfontazul" id="tel_Ponderado_Anual"></td>
+                            <td class="valores-calc tabfontazul" id="tel_ANUAL"></td>
+                        </tr>
+                        <tr>
+                            <td class="tabfontazul">LEI</td>
+                            <td class="valores">5%</td>
+                            <td class="valores-calc tabfontazul" id="lei_Ene"></td>
+                            <td class="valores-calc tabfontazul" id="lei_Feb"></td>
+                            <td class="valores-calc tabfontazul" id="lei_Mar"></td>
+                            <td class="valores-calc tabfontazul" id="lei_Abr"></td>
+                            <td class="valores-calc tabfontazul" id="lei_May"></td>
+                            <td class="valores-calc tabfontazul" id="lei_Jun"></td>
+                            <td class="valores-calc tabfontazul" id="lei_Jul"></td>
+                            <td class="valores-calc tabfontazul" id="lei_Ago"></td>
+                            <td class="valores-calc tabfontazul" id="lei_Sep"></td>
+                            <td class="valores-calc tabfontazul" id="lei_Oct"></td>
+                            <td class="valores-calc tabfontazul" id="lei_Nov"></td>
+                            <td class="valores-calc tabfontazul" id="lei_Dic"></td>
+                            <td class="valores-calc tabfontazul" id="lei_Ponderado_Anual"></td>
+                            <td class="valores-calc tabfontazul" id="lei_ANUAL"></td>
+                        </tr>
+                        <tr>
+                            <td class="tabfontazul">HADA</td>
+                            <td class="valores">10%</td>
+                            <td class="valores-calc tabfontazul" id="hada_Ene"></td>
+                            <td class="valores-calc tabfontazul" id="hada_Feb"></td>
+                            <td class="valores-calc tabfontazul" id="hada_Mar"></td>
+                            <td class="valores-calc tabfontazul" id="hada_Abr"></td>
+                            <td class="valores-calc tabfontazul" id="hada_May"></td>
+                            <td class="valores-calc tabfontazul" id="hada_Jun"></td>
+                            <td class="valores-calc tabfontazul" id="hada_Jul"></td>
+                            <td class="valores-calc tabfontazul" id="hada_Ago"></td>
+                            <td class="valores-calc tabfontazul" id="hada_Sep"></td>
+                            <td class="valores-calc tabfontazul" id="hada_Oct"></td>
+                            <td class="valores-calc tabfontazul" id="hada_Nov"></td>
+                            <td class="valores-calc tabfontazul" id="hada_Dic"></td>
+                            <td class="valores-calc tabfontazul" id="hada_Ponderado_Anual"></td>
+                            <td class="valores-calc tabfontazul" id="hada_ANUAL"></td>
+                        </tr>
+                        <tr>
+                            <td class="tabfontazul">SAP</td>
+                            <td class="valores">10%</td>
+                            <td class="valores-calc tabfontazul" id="sap_Ene"></td>
+                            <td class="valores-calc tabfontazul" id="sap_Feb"></td>
+                            <td class="valores-calc tabfontazul" id="sap_Mar"></td>
+                            <td class="valores-calc tabfontazul" id="sap_Abr"></td>
+                            <td class="valores-calc tabfontazul" id="sap_May"></td>
+                            <td class="valores-calc tabfontazul" id="sap_Jun"></td>
+                            <td class="valores-calc tabfontazul" id="sap_Jul"></td>
+                            <td class="valores-calc tabfontazul" id="sap_Ago"></td>
+                            <td class="valores-calc tabfontazul" id="sap_Sep"></td>
+                            <td class="valores-calc tabfontazul" id="sap_Oct"></td>
+                            <td class="valores-calc tabfontazul" id="sap_Nov"></td>
+                            <td class="valores-calc tabfontazul" id="sap_Dic"></td>
+                            <td class="valores-calc tabfontazul" id="sap_Ponderado_Anual"></td>
+                            <td class="valores-calc tabfontazul" id="sap_ANUAL"></td>
+                        </tr>
+                        <tr>
+                            <td class="tabhead"></td>
+                            <td class="tabhead valores" id="total_p">100%</td>
+                            <td class="valores-calc tabhead" id="total_Ene"></td>
+                            <td class="valores-calc tabhead" id="total_Feb"></td>
+                            <td class="valores-calc tabhead" id="total_Mar"></td>
+                            <td class="valores-calc tabhead" id="total_Abr"></td>
+                            <td class="valores-calc tabhead" id="total_May"></td>
+                            <td class="valores-calc tabhead" id="total_Jun"></td>
+                            <td class="valores-calc tabhead" id="total_Jul"></td>
+                            <td class="valores-calc tabhead" id="total_Ago"></td>
+                            <td class="valores-calc tabhead" id="total_Sep"></td>
+                            <td class="valores-calc tabhead" id="total_Oct"></td>
+                            <td class="valores-calc tabhead" id="total_Nov"></td>
+                            <td class="valores-calc tabhead" id="total_Dic"></td>
+                            <td class="valores-calc tabhead"></td>
+                            <td class="valores-calc tabhead" id="total_ANUAL"></td>
+                        </tr>
+                        <tr>
+                            <td class="tabhead" colspan="2">Disponibilidad global con ponderación</td>
+                            <td class="valores-calc tabhead" id="pond_Ene"></td>
+                            <td class="valores-calc tabhead" id="pond_Feb"></td>
+                            <td class="valores-calc tabhead" id="pond_Mar"></td>
+                            <td class="valores-calc tabhead" id="pond_Abr"></td>
+                            <td class="valores-calc tabhead" id="pond_May"></td>
+                            <td class="valores-calc tabhead" id="pond_Jun"></td>
+                            <td class="valores-calc tabhead" id="pond_Jul"></td>
+                            <td class="valores-calc tabhead" id="pond_Ago"></td>
+                            <td class="valores-calc tabhead" id="pond_Sep"></td>
+                            <td class="valores-calc tabhead" id="pond_Oct"></td>
+                            <td class="valores-calc tabhead" id="pond_Nov"></td>
+                            <td class="valores-calc tabhead" id="pond_Dic"></td>
+                            <td class="valores-calc tabhead" id="pond_Ponderado_Anual"></td>
+                            <td class="valores-calc tabhead" id="pond_ANUAL"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block script %}
+<script>
+
+    var meta = 90.90
+    $('.com_meta').html(`${meta}%`)
+
+    const cleanValues = () => {
+        $(".valores-calc").html('')
+        $(".valores-calc").removeClass('pastnar')
+        $(".valores-calc").removeClass('pastama')
+        $(".valores-calc").removeClass('pastver')
+    }
+
+    const updValues = (id, valor) => {
+        $(`#${id}`).html(`${numberFormat(valor)}%`)
+    }
+
+    const updValueSemaforo = (id, valor) => {
+        updValues(id, valor)
+        semaforo(id, valor)
+    }
+
+    const catalogo = {
+        "Correo Electronico": "correo",
+        "Syncfonia": "sync",
+        "Herr. Call Center": "herr",
+        "Gs1 En linea": "gs1",
+        "Internet": "inter",
+        "Telefonia": "tel",
+        "LEI": "lei",
+        "HADA": "hada",
+        "SAP": "sap"
+    }
+
+    const updInd8 = () => {
+        $("#loading").show()
+        let options = {
+            'year': $("#filter-year").val(),
+        }
+        cleanValues()
+        $.post('/app/getIndicador8', options, (rs) => {
+            let totales = {}
+            let totales_pon = {}
+            if(rs.status) {
+                for(var i in rs.data) {
+                    let indice = catalogo[rs.data[i].servicio]
+                    for(var j in rs.data[i]) {
+                        if(!['ponderacion','servicio'].includes(j)) {
+                            if(totales[j] == undefined) totales[j] = 0
+                            if(totales_pon[j] == undefined) totales_pon[j] = 0
+                            totales_pon[j] += j != 'Ponderado_Anual' ? rs.data[i][j] * rs.data[i].ponderacion / 100 : rs.data[i][j]
+                            totales[j] += rs.data[i][j]
+                            updValues(`${indice}_${j}`, rs.data[i][j])
+                        }
+                    }
+                }
+                for(var i in totales) {
+                    updValues(`total_${i}`, totales[i] / rs.data.length)
+                    updValues(`pond_${i}`, totales_pon[i])
+                }
+                updValues('com_real', totales_pon.ANUAL)
+                updValueSemaforo('com_avance', ((totales_pon.ANUAL % 1)/(meta % 1)) * 100)
+            }
+            $("#loading").hide()
+        })
+    }
+
+    updInd8()
+
+    $("#search").on('click', (e) => updInd8())
+
+</script>
+{% endblock %}

@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block titulo %}INDICADOR 07 - CUMPLIMIENTO DE SOLICITUDES Y REQUERIMIENTOS A TI{% endblock %}
+{% block page %}GS1 INDICADORES{% endblock %}
+
+{% block content %}
+<section class="content">
+    <div id="loading"><img src="{{ url_for('static', filename='images/loader.gif') }}" /></div>
+    <div class="content-wrap" style="padding: 0px;">
+        <div class="container center-clearfix">
+            <div class="col_full">
+                <div class="col_one_fifth">
+                    <label for="filter-year">Año:</label>
+                    <input class="form-control" type="number" id="filter-year" min="2021" placeholder="Año" value="{{ year }}"/>
+                </div>
+                <div class="col_full">
+                    <button class="btn btn-info" id="search"> Buscar </button>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered nobottommargin">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th class="tabgris" colspan="3"></th>
+                    </tr>
+                    <tr>
+                        <th class="tabgris">OBJETIVO</th>
+                        <th class="tabgris">REAL</th>
+                        <th class="tabgris">META</th>
+                        <th class="tabgris">AVANCE</th>
+                        <th class="tabgris">META {{ year }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tabhead title-table-td-4">Cumplimiento de solicitudes y requerimientos a TI</td>
+                        <td class="valores-calc" id="com_real">0</td>
+                        <td class="com_meta valores">{{ meta }}%</td>
+                        <td class="valores-calc" id="com_avance">0</td>
+                        <td class="com_meta valores">{{ meta }}%</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered nobottommargin table-equal">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="tabhead">Enero</th>
+                            <th class="tabhead">Febrero</th>
+                            <th class="tabhead">Marzo</th>
+                            <th class="tabhead">Abril</th>
+                            <th class="tabhead">Mayo</th>
+                            <th class="tabhead">Junio</th>
+                            <th class="tabhead">Julio</th>
+                            <th class="tabhead">Agosto</th>
+                            <th class="tabhead">Septiembre</th>
+                            <th class="tabhead">Octubre</th>
+                            <th class="tabhead">Noviembre</th>
+                            <th class="tabhead">Diciembre</th>
+                            <th class="tabheadyellow">Totales</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tabhead title-table-td-4">Tikets generados</td>
+                            <td class="valores-calc" id="generados_1"></td>
+                            <td class="valores-calc" id="generados_2"></td>
+                            <td class="valores-calc" id="generados_3"></td>
+                            <td class="valores-calc" id="generados_4"></td>
+                            <td class="valores-calc" id="generados_5"></td>
+                            <td class="valores-calc" id="generados_6"></td>
+                            <td class="valores-calc" id="generados_7"></td>
+                            <td class="valores-calc" id="generados_8"></td>
+                            <td class="valores-calc" id="generados_9"></td>
+                            <td class="valores-calc" id="generados_10"></td>
+                            <td class="valores-calc" id="generados_11"></td>
+                            <td class="valores-calc" id="generados_12"></td>
+                            <td class="valores-calc" id="generados_t"></td>
+                        </tr>
+                        <tr>
+                            <td class="tabhead title-table-td-4">Tikets cerrados</td>
+                            <td class="valores-calc" id="cerrados_1"></td>
+                            <td class="valores-calc" id="cerrados_2"></td>
+                            <td class="valores-calc" id="cerrados_3"></td>
+                            <td class="valores-calc" id="cerrados_4"></td>
+                            <td class="valores-calc" id="cerrados_5"></td>
+                            <td class="valores-calc" id="cerrados_6"></td>
+                            <td class="valores-calc" id="cerrados_7"></td>
+                            <td class="valores-calc" id="cerrados_8"></td>
+                            <td class="valores-calc" id="cerrados_9"></td>
+                            <td class="valores-calc" id="cerrados_10"></td>
+                            <td class="valores-calc" id="cerrados_11"></td>
+                            <td class="valores-calc" id="cerrados_12"></td>
+                            <td class="valores-calc" id="cerrados_t"></td>
+                        </tr>
+                        <tr>
+                            <td class="tabhead title-table-td-4">% cerrados</td>
+                            <td class="valores-calc" id="porcentaje_1"></td>
+                            <td class="valores-calc" id="porcentaje_2"></td>
+                            <td class="valores-calc" id="porcentaje_3"></td>
+                            <td class="valores-calc" id="porcentaje_4"></td>
+                            <td class="valores-calc" id="porcentaje_5"></td>
+                            <td class="valores-calc" id="porcentaje_6"></td>
+                            <td class="valores-calc" id="porcentaje_7"></td>
+                            <td class="valores-calc" id="porcentaje_8"></td>
+                            <td class="valores-calc" id="porcentaje_9"></td>
+                            <td class="valores-calc" id="porcentaje_10"></td>
+                            <td class="valores-calc" id="porcentaje_11"></td>
+                            <td class="valores-calc" id="porcentaje_12"></td>
+                            <td class="valores-calc" id="porcentaje_t"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block script %}
+<script>
+
+    var meta = {{ meta }}
+
+    const cleanValues = () => {
+        $(".valores-calc").html('')
+        $(".valores-calc").removeClass('pastnar')
+        $(".valores-calc").removeClass('pastama')
+        $(".valores-calc").removeClass('pastver')
+    }
+
+    const updValues = (id, valor) => {
+        $(`#${id}`).html(valor)
+    }
+
+    const updValueSemaforo = (id, valor) => {
+        updValues(id, `${numberFormat(valor)}%`)
+        semaforo(id, valor)
+    }
+
+    const updInd7 = () => {
+        $("#loading").show()
+        let options = {
+            'year': $("#filter-year").val(),
+        }
+        cleanValues()
+        $.post('/app/getIndicador7', options, (rs) => {
+            let total_gen = 0
+            let total_cerrados = 0
+            if(rs.status) {
+               for(var i in rs.data) {
+                   let mes = parseInt(rs.data[i].Mes)
+                   let porcentaje = (parseFloat(rs.data[i].cerrados) / rs.data[i].totales) * 100
+                   total_gen += rs.data[i].totales
+                   total_cerrados += parseInt(rs.data[i].cerrados)
+                   updValues(`generados_${mes}`, numberFormat(rs.data[i].totales))
+                   updValues(`cerrados_${mes}`, numberFormat(rs.data[i].cerrados))
+                   updValueSemaforo(`porcentaje_${mes}`, porcentaje)
+               }
+               updValues('generados_t', total_gen)
+               updValues('cerrados_t', total_cerrados)
+               updValueSemaforo('porcentaje_t', (total_cerrados/total_gen) * 100)
+               updValues('com_real', `${numberFormat((total_cerrados/total_gen) * 100)}%`)
+               updValueSemaforo('com_avance', (total_cerrados/total_gen) * 100)
+            }
+            $("#loading").hide()
+        })
+    }
+
+    updInd7()
+
+    $("#search").on('click', (e) => updInd7())
+
+</script>
+{% endblock %}

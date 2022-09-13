@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block titulo %}INDICADOR 05 - PRODUCTOS DE ASOCIADOS EN EL ULTIMO AÑO{% endblock %}
+{% block page %}GS1 INDICADORES{% endblock %}
+
+{% block content %}
+<section class="content">
+    <div id="loading"><img src="{{ url_for('static', filename='images/loader.gif') }}" /></div>
+    <div class="content-wrap m-3" style="padding: 0px;">
+        <div class="table-responsive m-4">
+            <table class="table table-bordered nobottommargin tab-equal">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th class="tabgris" colspan="4"></th>
+                </tr>
+                <tr>
+                    <th class="tabgris">OBJETIVO</th>
+                    <th class="tabgris">INDICADORES {{ year }}</th>
+                    <th class="tabgris">REAL</th>
+                    <th class="tabgris">TOTAL</th>
+                    <th class="tabgris">META</th>
+                    <th class="tabgris">AVANCE</th>
+                    <th class="tabgris">META</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tabnaranja">P3 Calidad de la información productos y servicios</td>
+                    <td>Productos de asociados actualizados en el último año</td>
+                    <td class="valores-calc" id="com_nuevos">0</td>
+                    <td class="valores-calc" id="com_total">0</td>
+                    <td class="com_meta valores">{{ meta }}%</td>
+                    <td class="valores-calc" id="com_avance">0</td>
+                    <td class="com_meta valores">{{ meta }}%</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block script %}
+<script>
+
+    var meta = {{ meta }}
+    var year = {{ year }}
+    var date_format = 'yyyy-mm-dd'
+    var today = new Date()
+
+    const setMonth = (fecha) => fecha < 10 ? `0${fecha}` : fecha
+
+    $("#filter-date-start").datepicker({
+        format: date_format,
+    })
+
+    $("#filter-date-end").datepicker({
+        format: date_format,
+    })
+
+    $("#filter-date-start").val(`${today.getFullYear() - 2}-01-01`)
+    $("#filter-date-end").val(`${today.getFullYear()}-${setMonth(today.getMonth() + 1)}-${today.getDate()}`)
+
+    const cleanValues = () => {
+        $(".valores-calc").html('')
+        $(".valores-calc").removeClass('pastnar')
+        $(".valores-calc").removeClass('pastama')
+        $(".valores-calc").removeClass('pastver')
+    }
+
+    const updValues = (id, valor) => {
+        $(`${id}`).html(valor)
+    }
+
+    const updIndicador5 = () => {
+        $("#loading").show()
+        cleanValues()
+        let options = {
+            'year': year,
+            'date-start': $("#filter-date-start").val(),
+            'date-end': $("#filter-date-end").val(),
+            'region': $("#filter-region").val(),
+            'tamanio': $("#filter-tamanio").val(),
+            'segmentacion': $("#filter-segmentacion").val(),
+            'industria': $("#filter-industria").val(),
+        }
+        $.post('/app/getIndicador5', options, (rs) => {
+            updValues(`#com_nuevos`, numberFormat(rs.data.nuevos))
+            updValues(`#com_total`, numberFormat(rs.data.totales))
+            porcentaje = rs.data.totales > 0 ? (rs.data.totales * meta) / 100 : 0
+            avance = (rs.data.nuevos / porcentaje ) * 100
+            updValues('#com_avance', `${numberFormat(avance)}%`)
+            semaforo('com_avance', avance)
+            $("#loading").hide()
+        })
+    }
+
+    updIndicador5()
+
+    $('#search').on('click', (e) => {
+        e.preventDefault()
+        updIndicador5()
+    })
+
+</script>
+{% endblock %}

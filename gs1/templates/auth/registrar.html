@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="author" content="SemiColonWeb" />
+	<meta X-XSS-Protection: 1; mode=block>
+
+	<!-- Stylesheets
+	============================================= -->
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/dark.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/font-icons.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}" type="text/css" />
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" type="text/css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+
+	<!-- Document Title
+	============================================= -->
+	<title>Login GS1</title>
+
+</head>
+
+<body class="stretched no-transition">
+
+	<!-- Document Wrapper
+	============================================= -->
+	<div id="wrapper" class="clearfix">
+
+		<!-- Content
+		============================================= -->
+		<section id="content">
+
+			<div class="content-wrap nopadding">
+
+				<div class="section nopadding nomargin" style="width: 100%; height: 100%; position: absolute; left: 0; top: 0; background: #002c6c;"></div>
+
+				<div class="section nobg full-screen nopadding nomargin">
+					<div class="container-fluid vertical-middle divcenter clearfix">
+
+						<div class="center" style="margin-bottom: 15px;">
+							<a href="#"><img src="{{ url_for('static', filename='images/logo-dark.png') }}" alt="GS1"></a><br>
+						</div>
+
+						<div class="card divcenter noradius noborder" style="max-width: 400px;">
+							<div class="card-body" style="padding: 40px;">
+								<form id="login-form" name="login-form" class="nobottommargin" method="post">
+									<h3 class="center" style="color: #002c6c;">REGISTRAR USUARIO</h3>
+									<input type="hidden" name="_tkn" id="_tkn" value="">
+									<div class="col_full">
+										<label for="username">Usuario:</label>
+										<input type="text" id="username" name="username" value="" class="form-control not-dark" />
+									</div>
+
+									<div class="col_full">
+										<label for="name">Nombre:</label>
+										<input type="text" id="name" name="name" value="" class="form-control not-dark" />
+									</div>
+
+									<div class="col_full">
+										<label for="lastname">Apellido:</label>
+										<input type="text" id="lastname" name="lastname" value="" class="form-control not-dark" />
+									</div>
+
+									<div class="col_full">
+										<label for="password">Contraseña:</label>
+										<input type="password" id="password" name="password" value="" class="form-control not-dark" />
+									</div>
+
+									<div class="col_full nobottommargin">
+										<button type="submit" class="button button-3d button-black nomargin" id="login-form-submit" name="login-form-submit" style="width:100%;">Registrar</button>
+									</div>
+								</form>
+								{% for message in get_flashed_messages() %}
+								<div class="alert alert-danger flash mt-4">{{ message }}</div>
+								{% endfor %}
+							</div>
+						</div>
+
+						<div class="center dark"><br>
+							<div class="inline-block"><a href="http://tssc.mx/" target="_blank"><img src="{{ url_for('static', filename='images/tssc.png') }}"></a></div>
+							<div class="inline-block"><a href="http://www.postech.com.mx" target="_blank"><img src="{{ url_for('static',filename='images/powered.png') }}"></a></div>
+							<div class="inline-block" style="margin-left: 25px;;"><img src="{{ url_for('static', filename='images/elk.png') }}"></div>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+		</section><!-- #content end -->
+
+	</div><!-- #wrapper end -->
+
+	<!-- Go To Top
+	============================================= -->
+	<div id="gotoTop" class="icon-angle-up"></div>
+
+	<!-- External JavaScripts
+	============================================= -->
+	<script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+
+	<!-- Footer Scripts
+	============================================= -->
+	<script src="{{ url_for('static', filename='js/functions.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/plugins/sha.js') }}"></script>
+</body>
+</html>

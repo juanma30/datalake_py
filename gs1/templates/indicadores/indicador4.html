@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block titulo %}INDICADOR 04 - EMPRESAS PARTICIPANDO EN COMITÉS Y GRUPOS DE TRABAJO{% endblock %}
+{% block page %}GS1 INDICADORES{% endblock %}
+
+{% block content %}
+<section id="content">
+    <div id="loading"><img src="{{ url_for('static', filename='images/loader.gif') }}" /></div>
+    <div class="content-wrap" style="padding: 0px;">
+        <div class="container center clearfix">
+            <div class="table-responsive">
+                <table class="table table-bordered nobottommargin">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th class="tabgris" colspan="4"></th>
+                        </tr>
+                        <tr>
+                            <th class="tabgris">OBJETIVO</th>
+                            <th class="tabgris">INDICADORES {{ year }}</th>
+                            <th class="tabgris">REAL</th>
+                            <th class="tabgris">META</th>
+                            <th class="tabgris">AVANCE</th>
+                            <th class="tabgris">META</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tabazul">A4 Colaboración entre asociados</td>
+                            <td>Empresas clave participando en Comités y Grupos de Trabajo</td>
+                            <td class="valores" id="com_real">0</td>
+                            <td class="com_meta valores">{{ meta }}</td>
+                            <td class="valores" id="com_avance">0</td>
+                            <td class="com_meta valores">{{ meta }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block script %}
+<script>
+    var meta = {{ meta }}
+    var year = {{ year }}
+
+    const updValues = (id, valor) => {
+        $(`${id}`).html(valor)
+    }
+
+    const updMeta = (anio, nuevo_anio) => {
+        if(anio != nuevo_anio) {
+            year = nuevo_anio
+            $.post('/app/getMeta', {'indicador':'indicador4', 'anio': nuevo_anio}, (rs) => {
+                if(rs.status) meta = rs.data
+            })
+        }
+    }
+
+    const updInd4 = () => {
+        $("#loading").show()
+        updMeta(year, $("#filter-year").val())
+        let options = {
+            'year': $("#filter-year").val(),
+            'region': $("#filter-region").val(),
+            'tamanio': $("#filter-tamanio").val(),
+            'segmentacion': $("#filter-segmentacion").val(),
+            'industria': $("#filter-industria").val(),
+        }
+
+        $.post('/app/getInd4', options, (rs) => {
+            if(rs.status) {
+                updValues('#com_real', rs.data)
+                updValues('.com_meta', meta)
+                percent = (parseInt(rs.data) * 100) / meta
+                updValues('#com_avance', `${numberFormat(percent)}%`)
+                semaforo('com_avance', percent)
+            }
+            $("#loading").hide()
+        })
+    }
+
+    updInd4()
+
+    $("#search").on('click', (e) => updInd4())
+
+</script>
+{% endblock %}

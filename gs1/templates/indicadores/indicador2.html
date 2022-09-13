@@ -5,6 +5,7 @@
 
 {% block content %}
 <section id="content">
+    <div id="loading"><img src="{{ url_for('static', filename='images/loader.gif') }}" /></div>
     <div class="content-wrap" style="padding: 0px;">
         <div class="container center clearfix">
             <div class="mt-2" style="float: right;"></div>
@@ -18,9 +19,6 @@
                 <div class="tab-container">
                     <div class="tab-content clearfix" id="op1">
                         <div class="col-full">
-                            <div class="container_loader_ppal" id="container_loader_chart1">
-                                <div class="loader-ppal" id="loader-chart1" style="bottom: 180px;"></div>
-                            </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered nobottommargin" id="codigo">
                                     <thead>
@@ -417,6 +415,8 @@
 {% endblock %}
 {% block script %}
 <script>
+
+
     var meta = { "codigo": {}, "catalogo": {}, "lei": {}, "total": {} }
     var year = new Date().getFullYear()
     const catalogo = { 1: "enero", 2: "febrero", 3: "marzo", 4: "abril", 5: "mayo", 6: "junio", 7: "julio", 8: "agosto", 9: "septiembre", 10: "octubre", 11: "noviembre", 12: "diciembre"}
@@ -438,18 +438,8 @@
     }
 
     const sumar = (ob) => {
+        if(Object.values(ob).length == 0) return 0
         return Object.values(ob).reduce((act, acum) => act + acum)
-    }
-
-    const updMetas = (nuevo_anio) => {
-        $.post('/app/getMeta',{'indicador':'indicador2', 'anio': nuevo_anio}, (rs) => {
-            if(rs.status){
-                for(var i in rs.data){
-                    meta[rs.data[i].titulo] = rs.data[i].metas
-                }
-                setMetas(meta)
-            }
-        })
     }
 
     const setMetas = (meta) => {
@@ -469,7 +459,19 @@
         }
     }
 
+    const updMetas = (nuevo_anio) => {
+        $.post('/app/getMeta',{'indicador':'indicador2', 'anio': nuevo_anio}, (rs) => {
+            if(rs.status){
+                for(var i in rs.data){
+                    meta[rs.data[i].titulo] = rs.data[i].metas
+                }
+                setMetas(meta)
+            }
+        })
+    }
+
     const updTables = () => {
+        $("#loading").show()
         let options = {
             'year': $("#filter-year").val(),
             'region': $("#filter-region").val(),
@@ -549,12 +551,11 @@
             porcentajeTotal = (tt_real * 100) / sumar(meta.total)
             updValueSemaforo('res_m_anual', porcentajeTotal)
             updValue(`res_r_t`, numberFormat(tt_real))
+            $("#loading").hide()
         })
-        $("#container_loader_chart1").hide()
     }
 
     $("#search").on('click', (e) => {
-        $("#container_loader_chart1").show()
         updTables()
     })
 

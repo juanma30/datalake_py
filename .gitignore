@@ -1,1 +1,5 @@
-gs1venv
+gs1venv/
+__pycache__/
+.idea/
+gs1/__pycache__/
+gs1/.idea/
